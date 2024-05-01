@@ -1,61 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Palavra | Benefícios</title>
-    <link rel="icon" href="./img/logo/Logo - Wordle Vetor.png">
+    <link rel="icon" href="./img/logo/Logo - Wordle Vetor.png" />
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/beneficios.css">
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/beneficios.css" />
     <!-- JS -->
-    <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <script
+      src="https://kit.fontawesome.com/026675cdf7.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <header>
-        <nav class="header-nav">
-            <ul class="header-menu">
-                <li class="header-elemento-menu"><i class="fa-solid fa-bars"></i></li>
-                <li class="header-como-jogar"><i class="fa-solid fa-circle-question"></i></li>
-            </ul>
-            <div class="header-logo">PALAVRA</div>
-            <div class="header-menu">
-                <li class="header-pontos"><i class="fa-solid fa-square-parking"></i></li>
-                <li class="header-ranking"><i class="fa-solid fa-square-poll-vertical"></i></li>
-                <li class="header-usuario">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <div class="header-usuario-info">
-                        <span id="cumprimento-logado">Bem-vindo(a)!</span>
-                        <span id="usuario-nome">Usuário</span>
-                    </div>
-                </li>
-                <li class="header-configuracao"><i class="fa-solid fa-gear"></i></li>
+      <nav class="header-nav">
+        <ul class="header-menu">
+          <li class="header-elemento-menu"><i class="fa-solid fa-bars"></i></li>
+          <li class="header-como-jogar">
+            <i class="fa-solid fa-circle-question"></i>
+          </li>
+        </ul>
+        <div class="header-logo">PALAVRA</div>
+        <div class="header-menu">
+          <li class="header-pontos">
+            <i class="fa-solid fa-square-parking"></i>
+            <span id="usuario-pontos">0</span> <span>pontos</span>
+          </li>
+          <li class="header-ranking">
+            <i class="fa-solid fa-square-poll-vertical"></i>
+          </li>
+          <li class="header-usuario">
+            <i class="fa-solid fa-circle-user"></i>
+            <div class="header-usuario-info">
+              <span id="cumprimento-logado">Bem-vindo(a)!</span>
+              <span id="usuario-nome">Usuário</span>
             </div>
-        </nav>
+          </li>
+          <li class="header-configuracao"><i class="fa-solid fa-gear"></i></li>
+        </div>
+      </nav>
     </header>
     <main>
-        <div class="main-container">
-            <div class="main-title"><i class="fa-solid fa-square-parking"></i> <h1>Benefícios e formas de pagamento</h1></div>
-            <div class="main-container-beneficios">
-                <span>Assine a nossa plataforma para ter beneficios e elevar a sua jogabilidade!</span>
-                <div class="main-beneficios">
-                    <div class="beneficio-card" id="beneficio-free">
-
-                    </div>
-                    <div class="beneficio-card" id="beneficio-mensal">
-                        
-                    </div>
-                    <div class="beneficio-card" id="beneficio-anual">
-                        
-                    </div>
-                </div>
-            </div>
+      <div class="main-container">
+        <div class="main-title">
+          <i class="fa-solid fa-square-parking"></i>
+          <h1>Benefícios e formas de pagamento</h1>
         </div>
+        <div class="main-container-beneficios">
+          <span
+            >Assine a nossa plataforma para ter beneficios e elevar a sua
+            jogabilidade!</span
+          >
+          <div class="main-beneficios">
+            <div class="beneficio-card" id="beneficio-free">
+              <h3 class="beneficio-card-title">Plano Fee</h3>
+              <div class="beneficio-card-icon">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="beneficio-card-text">Gratuito</div>
+              <span class="beneficio-card-span"
+                >Experimente o desafio do Wordle sem compromissos!</span
+              >
+              <ul class="beneficio-card-list">
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+              </ul>
+              <button class="beneficio-card-btn">Plano Atual</button>
+            </div>
+            <div class="beneficio-card" id="beneficio-mensal">
+              <h3 class="beneficio-card-title">Plano Mensal</h3>
+              <div class="beneficio-card-icon">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="beneficio-card-text">R$ 00,00 / mês</div>
+              <span class="beneficio-card-span"
+                >Experimente o desafio do Wordle por um mês! Sem compromissos,
+                cancele a qualquer momento.</span
+              >
+              <ul class="beneficio-card-list">
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+              </ul>
+              <button class="beneficio-card-btn">Escolher Plano</button>
+            </div>
+            <div class="beneficio-card" id="beneficio-anual">
+              <h3 class="beneficio-card-title">Plano Anual</h3>
+              <div class="beneficio-card-icon">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="beneficio-card-text">R$ 00,00 / anual</div>
+              <div class="beneficio-card-economize">Economize 00%</div>
+              <ul class="beneficio-card-list">
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+                <li class="beneficio-card-item">
+                  Lorem Ipsum is simply dummy text
+                </li>
+              </ul>
+              <button class="beneficio-card-btn">Escolher Plano</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
-        <div class="footer-container">
-            <span>Palavra  - projeto de engenharia de software - inspirado no jogo <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> </span>
-        </div>
+      <div class="footer-container">
+        <span
+          >Palavra - projeto de engenharia de software - inspirado no jogo
+          <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a>
+        </span>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
