@@ -1,0 +1,14 @@
+:root {
+    --cor-primaria: #0CCABA;
+       
+   /* Cores teclado */
+   --borda-campo-letra: #999999;
+   --cor-teclado: #D9D9D9;
+    --cor-letra-teclado: #3f3939;
+    --cor-botao-jogar: #000000; 
+   
+       }
+       .container{
+        max-width: 1390px;
+        margin: 0 auto;
+    }

@@ -1,0 +1,131 @@
+@import url(color.css);
+
+.container{
+    max-width: 1390px;
+    margin: 0 auto;
+}
+.vetor-e-titulo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 85px;
+    gap: 10px;
+    margin-top: 60px;
+}
+
+.conquista-e-recompensas h1{
+    font-size: 34px;
+    
+}
+
+.seus-pontos{
+    font-size: 16px;
+    margin: 32px 0 0 79px;
+}
+
+.conquistas{
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    padding:44px 0 0 85px;
+}
+
+
+.titulo-conquista,
+.titulo-missao-recompensa,
+.missao p{
+    font-size: 24px;
+}
+
+.titulo-conquista{
+    margin-right: 30px;
+}
+
+.carrossel-conquista{
+    padding: 0 30px;
+    max-width: 1000px; /* Defina o valor máximo desejado */
+    margin-left: 19px;
+
+}
+/*FUNCIONALIDADE CARROSSEL*/
+.carrossel-conquista ul{
+    padding: 0; 
+    margin: 0; 
+    width: 893px;
+}
+
+.carrossel-conquista li {
+    margin-right: 31px;
+    scroll-snap-align: start; 
+}
+
+
+
+.carrossel-conquista .slick-prev {
+    left: -60px;
+}
+
+.carrossel-conquista .slick-next {
+    right: -20px;
+} 
+.slick-prev::before, .slick-next::before{
+color: #000 !important;
+opacity: 100  !important;
+background-image: url("https://imgur.com/a/8Eq12cL") !important ;
+font-size: 35px !important;
+}
+.slick-track{
+    height: 220px;
+    padding-top: 10px;
+}
+
+/*ESTILIZAÇÃO DO CARD */
+.carrossel-conquista ul .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    filter: drop-shadow(0px 3px 2px #999999);
+    font-size: 16px;  
+}
+
+.carrossel-conquista .item img{
+    margin: 14px 0 19px 0;
+    height: auto; /* Permite que a altura da imagem seja ajustada automaticamente */
+}
+/*ESTILIZAÇÃO MISSÕES*/
+.missoes-e-recompensas{
+    margin-top: 71px;
+    display: flex;
+    flex-direction: column;
+    gap: 82px;
+    max-width: 1196px;
+
+}
+.titulo-missao-recompensa{
+    margin-left: 85px;
+}
+.missoes{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 64px;
+    padding: 0 0 76px 88px;
+
+}
+.missoes .missao{
+    display: flex;
+    justify-content:space-between;
+}
+.imagem-pontuacao{
+    display:flex;
+    align-items: center;
+    gap: 29px;
+}
+.missao img{
+    width: 48px;
+} 
