@@ -1,0 +1,292 @@
+/* Header */
+header {
+    width: 100%;
+    height: 80px;
+    transition: all 333ms ease-in-out;
+}
+
+header .header-nav {
+    width: 100%;
+    max-width: 1390px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+header .header-nav .header-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+header .header-nav .header-menu li {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+header .header-nav .header-menu li i {
+    font-size: 24px;
+}
+
+header .header-nav .header-logo {
+    font-size: 34px;
+    color: #0ccaba;
+    transition: 0.3s;
+    margin-left: 100px;
+}
+
+header .header-nav .header-menu .header-usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+header .header-nav .header-menu .header-usuario .header-usuario-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+/* Main */
+main {
+    width: 100%;
+    transition: all 333ms ease-in-out;
+    margin: 50px 0;
+}
+
+main .main-container {
+    width: 100%;
+    max-width: 1390px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+main .main-container .main-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 50px 0;
+}
+
+main .main-container .main-title i {
+    font-size: 27px;
+}
+
+main .main-container .main-container-beneficios {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+main .main-container .main-container-beneficios span {
+    font-size: 18px;
+}
+
+main .main-container .main-container-beneficios .main-beneficios {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card {
+    max-width: 350px;
+    width: 100%;
+    min-height: 450px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+    text-align: center;
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card h3,
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card .beneficio-card-title {
+    font-size: 18px;
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card .beneficio-card-icon i {
+    font-size: 48px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card .beneficio-card-span {
+    font-size: 14px;
+    color: #999;
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card .beneficio-card-btn {
+    width: 250px;
+    height: 56px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card .beneficio-card-economize {
+    width: 250px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    background: #0ccaba;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+main .main-container .main-container-beneficios .main-beneficios .beneficio-card .beneficio-card-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+/* Gratuito */
+#beneficio-free {
+    border: 3px solid #d9d9d9;
+}
+
+#beneficio-free .beneficio-card-icon i {
+    color: #d9d9d9;
+}
+
+#beneficio-free .beneficio-card-btn {
+    background: #d9d9d9;
+}
+
+/* Mensal */
+
+#beneficio-mensal {
+    border: 3px solid #ffd952;
+}
+
+#beneficio-mensal .beneficio-card-icon i {
+    color: #ffd952;
+}
+
+#beneficio-mensal .beneficio-card-btn {
+    background: #ffd952;
+}
+
+/* Anual */
+
+#beneficio-anual {
+    border: 3px solid #0ccaba;
+}
+
+#beneficio-anual .beneficio-card-icon i {
+    color: #0ccaba;
+}
+
+#beneficio-anual .beneficio-card-btn {
+    background: #0ccaba;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background: #000;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+}
+
+footer .footer-container {
+    width: 100%;
+    max-width: 1390px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    margin: 0 auto;
+}
+
+footer .footer-container span {
+    color: #fff;
+    font-size: 18px;
+    transition: all 0.3s;
+    word-wrap: break-word;
+}
+
+footer .footer-container span a {
+    color: #0ccaba;
+    text-decoration: none;
+}
+
+/* Desktop */
+
+/* Mobile */
+@media screen and (max-width: 991px) {
+    header .header-nav {
+        justify-content: center;
+    }
+    header .header-nav .header-menu {
+        display: none;
+    }
+    header .header-nav .header-logo {
+        margin-left: 0;
+    }
+    main .main-container .main-title {
+        justify-content: center;
+    }
+    main .main-container .main-title h1 {
+        font-size: 1.3rem;
+    }
+    main .main-container .main-container-beneficios .main-beneficios {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Hover */
+
+@media (hover: hover) {
+    header .header-nav .header-menu li:hover {
+        color: #0ccaba;
+        cursor: pointer;
+    }
+
+    header .header-nav .header-logo:hover {
+        transform: scale(1.02);
+    }
+
+    header .header-nav .header-menu .header-usuario:hover {
+        color: #0ccaba;
+    }
+
+    footer .footer-container span a:hover {
+        text-decoration: underline;
+    }
+}
