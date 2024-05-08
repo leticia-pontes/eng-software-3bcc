@@ -6,11 +6,12 @@
 }
 .vetor-e-titulo{
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    margin-left: 85px;
-    gap: 10px;
-    margin-top: 60px;
+    gap: 8px;
+    width: 100%;
+    max-width: 1190px;
+    margin: 0 auto;
+    padding: 10px 0;
 }
 
 .conquista-e-recompensas h1{
@@ -19,54 +20,63 @@
 }
 
 .seus-pontos{
-    font-size: 16px;
-    margin: 32px 0 0 79px;
+    width: 100%;
+    max-width: 1190px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
+
 .conquistas{
+    width: 100%;
+    max-width: 1190px;
+    margin: 0 auto;
     display: flex;  
     justify-content: center;
     align-items: center;
-    padding:44px 0 0 85px;
+    gap:20px
+    
 }
 
 
-.titulo-conquista,
 .titulo-missao-recompensa,
 .missao p{
     font-size: 24px;
 }
 
 .titulo-conquista{
-    margin-right: 30px;
+    width: 100%;
+    max-width: 237px;
+    line-height: 1;
+    font-size: 1.5rem;
 }
 
 .carrossel-conquista{
-    padding: 0 30px;
-    max-width: 1000px; /* Defina o valor máximo desejado */
+    max-width: 75%;
+    width: 100%;
     margin-left: 19px;
-
 }
 /*FUNCIONALIDADE CARROSSEL*/
 .carrossel-conquista ul{
-    padding: 0; 
-    margin: 0; 
-    width: 893px;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
 }
 
 .carrossel-conquista li {
-    margin-right: 31px;
     scroll-snap-align: start; 
+    margin: 0 15px;
 }
 
 
 
 .carrossel-conquista .slick-prev {
-    left: -60px;
+    left: 0px;
+    z-index: 2;
 }
 
 .carrossel-conquista .slick-next {
-    right: -20px;
+    right: 0px;
 } 
 .slick-prev::before, .slick-next::before{
 color: #000 !important;
@@ -129,3 +139,18 @@ font-size: 35px !important;
 .missao img{
     width: 48px;
 } 
+/* Desktop */
+
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .conquistas{
+        flex-direction: column;
+        padding-left: 31px;
+    }
+    .carrossel-conquista ul{
+        padding: 0; 
+        margin: 0; 
+        width: 500px;
+    }
+}
