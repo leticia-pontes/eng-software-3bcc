@@ -13,13 +13,16 @@
     padding: 18px;
         }
         
-        .footer__text {
+        .footer__text p {
     color: #fff;
     font-size: 18px;
     line-height: normal;
     font-weight: 400;
         }
         
-        .footer__text span{
+        .footer__text a{
     color: var(--cor-primaria);
+    display: inline;
         }
+
+    

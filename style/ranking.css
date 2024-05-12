@@ -73,4 +73,115 @@
     width: 48px;
 }
 
+/*RESPONSIVIDADE*/
+
+@media screen and (max-width: 768px) {
+  
+    .titulo-ranking{
+        padding-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .imagem-e-nome{
+        flex-direction: column;
+        text-align: center;
+    }
+    .perfil-usuario .nome-usuario{
+        margin-left: 0;
+        margin-top: 8%;
+    }
+    .perfil-usuario{
+        padding: 0px;
+        padding-top: 5%;
+        flex-direction: column;
+        text-align: center;
+    }
+    .perfil-usuario .pontuacao{
+        width: auto;
+    }
+  
+    .ranking {
+        padding: 0 67px 77px 67px;
+    }
+
+    .ranking .usuario{
+        padding-right: 7%;
+        padding-left: 5%;
+    }
+    .usuario .trofeu-e-nome {
+        gap: 20px;
+    }
+
+  }
+
+  @media screen and (max-width: 600px){
+ 
+    .ranking {
+        margin-top: 100px;
+        padding: 0 50px 77px 50px;
+    } 
+    
+  }
+
+  @media screen and (max-width: 570px){
+    .titulo-ranking h1{
+        font-size: 30px;
+    }
+    .ranking{
+        margin-top: 90px;
+        padding: 0 30px 77px 30px;
+    }
+    .ranking .usuario{
+        padding-right: 5%;
+        padding-left: 4%;
+    }
+    .usuario .trofeu-e-nome {
+        gap: 10px;
+    }
+  
+  }
+
+  @media screen and (max-width: 470px){
+    .titulo-ranking h1{
+        font-size: 28px;
+    }
+    .perfil-usuario .nome-usuario,
+        .perfil-usuario .pontuacao{
+        font-size: 20px;
+    }
+    .ranking .usuario{
+        font-size: 14px;
+    }
+    .usuario .trofeu-e-nome img{
+        width: 40px;
+    }
+  }
+
+  @media screen and (max-width: 440px){
+    .titulo-ranking h1{
+        font-size: 24px;
+    }
+    .ranking{
+        padding: 0 15px 77px 15px;
+    }
+ 
+  }
+
+  @media screen and (max-width: 400px){
+    .titulo-ranking h1{
+        font-size: 20px;
+    }
+    .usuario .trofeu-e-nome {
+     gap: 8px;
+    }
+
+    .ranking .usuario{
+        height: 75px;
+    }
+    .usuario .pontuacao-usuario{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+  }
 
