@@ -1,4 +1,6 @@
 @import url('colors.css');
+@import url('footer.css');
+@import url('header.css');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
 * {
@@ -53,12 +55,12 @@ input, button, textarea, select {
 }
 
 .m-hidden {
-    display: block;
+    display: flex;
 }
 
 @media (max-width: 992px) {
     .d-hidden {
-        display: block;
+        display: flex;
     }
 
     .m-hidden {

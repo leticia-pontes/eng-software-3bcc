@@ -68,3 +68,20 @@ function inserirLetra(tecla) {
 document.addEventListener('DOMContentLoaded', adicionarClasseAtiva);
 document.addEventListener('DOMContentLoaded', adicionarLetrasNosCampos);
 
+
+
+function showContent(contentId, clickedLink) {
+    var contents = document.getElementsByClassName('configuracoes__content');
+    var links = document.querySelectorAll('.configuracoes__sidebar-lateral a');
+    
+    for (var i = 0; i < contents.length; i++) {
+        contents[i].classList.remove('active');
+    }
+    
+    for (var i = 0; i < links.length; i++) {
+        links[i].classList.remove('active');
+    }
+    
+    document.getElementById(contentId).classList.add('active');
+    clickedLink.classList.add('active');
+}

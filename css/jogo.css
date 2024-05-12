@@ -45,6 +45,8 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
+    max-width: 1350px;
+    margin: 0 auto
 }
 
 .usuario__container {
@@ -80,6 +82,7 @@
 
 .usuario__select-tema {
     width: 240px;
+    height: 50px;
     box-shadow: var(--borda-box-shadow);
     border-radius: 5px;
     padding-left: 15px;
