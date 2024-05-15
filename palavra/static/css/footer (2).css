@@ -1,0 +1,28 @@
+@import url(color.css);
+
+.footer {
+    width: 100%;
+    background-color: #000;
+        }
+        
+        .footer__content {
+    max-width: 1390px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 18px;
+        }
+        
+        .footer__text p {
+    color: #fff;
+    font-size: 18px;
+    line-height: normal;
+    font-weight: 400;
+        }
+        
+        .footer__text a{
+    color: var(--cor-primaria);
+    display: inline;
+        }
+
+    
