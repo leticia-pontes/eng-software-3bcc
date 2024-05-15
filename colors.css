@@ -1,0 +1,13 @@
+:root {
+    --cor-primaria: #0CCABA;
+    --cor-bordas-gerais: #a3a3a3;
+
+    /* Cores teclado */
+    --borda-campo-letra: #999999;
+    --cor-teclado: #D9D9D9;
+    --cor-letra-teclado: #3f3939;
+
+    /* Sombra */
+    --borda-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
+}
