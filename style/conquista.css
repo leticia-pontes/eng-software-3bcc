@@ -14,6 +14,9 @@
     padding: 10px 0;
 }
 
+.vetor-e-titulo .fa-solid.fa-square-parking {
+    font-size: 24px; /* Altere o tamanho conforme desejado */
+}
 .conquista-e-recompensas h1{
     font-size: 34px;
     
@@ -105,7 +108,7 @@ font-size: 35px !important;
 
 .carrossel-conquista .item img{
     margin: 14px 0 19px 0;
-    height: auto; /* Permite que a altura da imagem seja ajustada automaticamente */
+    height: auto; 
 }
 /*ESTILIZAÇÃO MISSÕES*/
 .missoes-e-recompensas{
