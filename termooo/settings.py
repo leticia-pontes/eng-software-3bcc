@@ -49,6 +49,10 @@ CSRF_TRUSTED_ORIGINS = config(
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< Updated upstream
+=======
+    # '.apps.TermoooConfig',
+>>>>>>> Stashed changes
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
