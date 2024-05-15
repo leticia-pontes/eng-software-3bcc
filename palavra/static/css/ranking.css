@@ -1,0 +1,187 @@
+
+.titulo-ranking{
+    padding: 40px 0 0 88px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.titulo-ranking h1{
+    font-size: 34px;
+    margin-left: 7px;
+}
+.perfil-usuario{
+    padding: 58px 127px 0 67px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.perfil-usuario .imagem-e-nome{
+    display: flex;
+    align-items: center;
+}
+.perfil-usuario .nome-usuario{
+    display: flex;
+    flex-direction: column ;
+    margin-left: 67px;
+    gap: 39px;
+    font-size: 24px;
+}
+
+.perfil-usuario .circulo-usuario {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    background-color: #FFFFFF;
+    filter: drop-shadow(0px 3px 2px #999999);
+}
+.perfil-usuario .pontuacao{
+    font-size: 24px; 
+    text-align: center;
+    width: 10%;
+    line-height: 1.5; 
+
+}
+.ranking{
+    display: flex;
+    margin-top: 111px;
+    padding: 0 67px 77px 90px;
+    gap: 20px;
+    flex-direction: column;
+}
+.ranking .usuario{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    filter: drop-shadow(0px 3px 2px #999999);
+    height: 80px;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 0 60px 0 19px;
+
+}
+.usuario .trofeu-e-nome{
+    display: flex;
+    align-items: center;
+    gap: 51px;
+}
+
+.usuario .trofeu-e-nome img{
+    width: 48px;
+}
+
+/*RESPONSIVIDADE*/
+
+@media screen and (max-width: 768px) {
+  
+    .titulo-ranking{
+        padding-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .imagem-e-nome{
+        flex-direction: column;
+        text-align: center;
+    }
+    .perfil-usuario .nome-usuario{
+        margin-left: 0;
+        margin-top: 8%;
+    }
+    .perfil-usuario{
+        padding: 0px;
+        padding-top: 5%;
+        flex-direction: column;
+        text-align: center;
+    }
+    .perfil-usuario .pontuacao{
+        width: auto;
+    }
+  
+    .ranking {
+        padding: 0 67px 77px 67px;
+    }
+
+    .ranking .usuario{
+        padding-right: 7%;
+        padding-left: 5%;
+    }
+    .usuario .trofeu-e-nome {
+        gap: 20px;
+    }
+
+  }
+
+  @media screen and (max-width: 600px){
+ 
+    .ranking {
+        margin-top: 100px;
+        padding: 0 50px 77px 50px;
+    } 
+    
+  }
+
+  @media screen and (max-width: 570px){
+    .titulo-ranking h1{
+        font-size: 30px;
+    }
+    .ranking{
+        margin-top: 90px;
+        padding: 0 30px 77px 30px;
+    }
+    .ranking .usuario{
+        padding-right: 5%;
+        padding-left: 4%;
+    }
+    .usuario .trofeu-e-nome {
+        gap: 10px;
+    }
+  
+  }
+
+  @media screen and (max-width: 470px){
+    .titulo-ranking h1{
+        font-size: 28px;
+    }
+    .perfil-usuario .nome-usuario,
+        .perfil-usuario .pontuacao{
+        font-size: 20px;
+    }
+    .ranking .usuario{
+        font-size: 14px;
+    }
+    .usuario .trofeu-e-nome img{
+        width: 40px;
+    }
+  }
+
+  @media screen and (max-width: 440px){
+    .titulo-ranking h1{
+        font-size: 24px;
+    }
+    .ranking{
+        padding: 0 15px 77px 15px;
+    }
+ 
+  }
+
+  @media screen and (max-width: 400px){
+    .titulo-ranking h1{
+        font-size: 20px;
+    }
+    .usuario .trofeu-e-nome {
+     gap: 8px;
+    }
+
+    .ranking .usuario{
+        height: 75px;
+    }
+    .usuario .pontuacao-usuario{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+  }
+
