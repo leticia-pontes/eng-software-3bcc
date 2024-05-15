@@ -1,6 +1,4 @@
 @import url('colors.css');
-@import url('footer.css');
-@import url('header.css');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
 * {
@@ -55,28 +53,15 @@ input, button, textarea, select {
 }
 
 .m-hidden {
-    display: flex;
+    display: block;
 }
 
 @media (max-width: 992px) {
     .d-hidden {
-        display: flex;
+        display: block;
     }
 
     .m-hidden {
         display: none !important;
     }
-<<<<<<<< HEAD:termooo/static/css/reset.css
-========
-}
->>>>>>>> 284f909390d956bccc8876310b16367afdbf4d79:palavra/static/css/reset.css
-
-body{
-    min-width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-
 }
