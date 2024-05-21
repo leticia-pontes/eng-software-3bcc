@@ -13,7 +13,9 @@
     margin: 0 auto;
     padding: 10px 0;
 }
-
+.vetor-e-titulo i{
+    width: 27px;
+}
 .conquista-e-recompensas h1{
     font-size: 34px;
     
@@ -105,7 +107,7 @@ font-size: 35px !important;
 
 .carrossel-conquista .item img{
     margin: 14px 0 19px 0;
-    height: auto; /* Permite que a altura da imagem seja ajustada automaticamente */
+    height: auto; 
 }
 /*ESTILIZAÇÃO MISSÕES*/
 .missoes-e-recompensas{
@@ -139,7 +141,6 @@ font-size: 35px !important;
 .missao img{
     width: 48px;
 } 
-/* Desktop */
 
 
 /* Mobile */
