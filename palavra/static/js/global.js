@@ -68,8 +68,6 @@ function inserirLetra(tecla) {
 document.addEventListener('DOMContentLoaded', adicionarClasseAtiva);
 document.addEventListener('DOMContentLoaded', adicionarLetrasNosCampos);
 
-
-
 function showContent(contentId, clickedLink) {
     var contents = document.getElementsByClassName('configuracoes__content');
     var links = document.querySelectorAll('.configuracoes__sidebar-lateral a');
@@ -85,3 +83,20 @@ function showContent(contentId, clickedLink) {
     document.getElementById(contentId).classList.add('active');
     clickedLink.classList.add('active');
 }
+
+
+// MAQUINA DE ESCREVER
+
+function typeWrite(elemento){
+    const textoArray = elemento.innerHTML.split('');
+    elemento.innerHTML = ' ';
+    textoArray.forEach(function(letra, i) {   
+      
+    setTimeout(function(){
+        elemento.innerHTML += letra;
+    }, 40 * i)
+
+  });
+}
+const texto = document.querySelector('.pagina__texto');
+typeWrite(texto);
