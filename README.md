@@ -1,6 +1,6 @@
 # Palavra
 
-Palavra é um jogo baseado na web, inspirado no popular jogo online Wordle (term.ooo). No Palavra, os jogadores devem adivinhar uma palavra oculta dentro de um número limitado de tentativas. O jogo fornece feedback sobre a precisão das tentativas para ajudar os jogadores a deduzirem a palavra correta.
+Palavra é um jogo baseado na web, inspirado nos jogos online Wordle e Termo. No Palavra, os jogadores devem adivinhar uma palavra oculta dentro de um número limitado de tentativas. O jogo fornece feedback sobre a precisão das tentativas para ajudar os jogadores a deduzirem a palavra correta.
 
 ## Funcionalidades
 
