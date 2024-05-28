@@ -107,6 +107,7 @@ font-size: 35px !important;
     margin: 14px 0 19px 0;
     height: auto; /* Permite que a altura da imagem seja ajustada automaticamente */
 }
+
 /*ESTILIZAÇÃO MISSÕES*/
 .missoes-e-recompensas{
     margin-top: 71px;
@@ -139,8 +140,8 @@ font-size: 35px !important;
 .missao img{
     width: 48px;
 } 
-/* Desktop */
 
+/* Desktop */
 
 /* Mobile */
 @media screen and (max-width: 768px) {
