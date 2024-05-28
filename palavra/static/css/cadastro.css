@@ -1,4 +1,4 @@
-@import url(color.css);
+@import url(colors.css);
 .header__logo{
         display: flex;
         align-items: center;
@@ -27,19 +27,16 @@
     margin-left: auto;
 
 }
-.navbar-brand{
-    background-color: green;
+
+.navbar-brand {
     text-align: center;
     width: 56%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-.navbar-brand{
     font-size: 34px;
     color: var(--cor-primaria);
-    }
+}
 
 .header button{
     margin-right: 40px ;
