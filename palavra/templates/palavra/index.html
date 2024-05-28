@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
     <title>Palavra</title>
 </head>
 <body class="tela-entrada">
@@ -36,11 +37,11 @@
             </div>
 
             <div class="header__botoes">
-                <a href="#" class="header__botao-entrar">
+                <a href="{% url 'cadastro' %}" class="header__botao-entrar">
                     Entre
                 </a>
                 
-                <a href="#" class="header__botao-cadastrar">
+                <a href="{% url 'cadastro' %}" class="header__botao-cadastrar">
                     Cadastre-se
                 </a>
             </div>
@@ -81,7 +82,6 @@
             <div class="pagina__nome-palavra">
                 palavra
             </div>
-
 
         </div>
     </div>

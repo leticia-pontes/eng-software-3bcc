@@ -7,12 +7,62 @@
     <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/jogo.css' %}">
+    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
 
     <title>Palavra</title>
+    <style>
+        .container-layout{
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            position: absolute;
+        }
+        .container-popup{
+            display: block;
+            z-index: 10;
+            height: 500px;
+            width: 650px;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fff;
+        }
+        .botao-fechar:pointer {
+            cursor: pointer;
+        }
+        titulo-popup {
+            {% comment %} font-size: 34px; {% endcomment %}
+            color: var(--cor-primaria);
+            {% comment %} line-height: 30px; {% endcomment %}
+        }
+    </style>
 </head>
 <body>
+    
+    <!-- POPUP -->
+    <div class="container-layout">
+        <div id="container-popup" class="container-popup">
+            <div class="header-popup">
+                <span class="titulo-popup">PALAVRA</span>
+                <span class="botao-fechar" id="fechar-popup">&times;</span>
+            </div>
+            &nbsp;
+            <div class="informacoes-popup">
+                <p>Como jogar?</p>&nbsp;
+                <p>Descubra as palavras certas. Depois de cada tentativa, as peças mostram o quão perto você está da solução.</p>&nbsp;
+                <p>Os acentos são preenchidos automaticamente e não são considerados nas dicas.</p>&nbsp;
+                <p>As palavras podem possuir letras repetidas.</p>&nbsp;
+                <p>Uma palavra nova aparece a cada dia.</p>&nbsp;
+            </div>
+        </div>
+    </div>
+
     <!-- HEADER -->
     <nav class="header">
         <div class="navbar navbar-expand-lg header__content" aria-label="Offcanvas navbar large">
@@ -43,7 +93,7 @@
                 </button>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Bem vindo(a) gIOVANA!</h5>
+                        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Bem vindo(a) {{ request.session.usuario }} </h5>
                         <button type="button" class="btn-close btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -57,7 +107,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link navbar-item" href="#">
+                                <a class="nav-link navbar-item" href="{% url 'ranking' %}">
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M19.5312 0H2.34375C1.0498 0 0 1.0498 0 2.34375V19.5312C0 20.8252 1.0498 21.875 2.34375 21.875H19.5312C20.8252 21.875 21.875 20.8252 21.875 19.5312V2.34375C21.875 1.0498 20.8252 0 19.5312 0ZM7.8125 16.4062C7.8125 16.8379 7.46289 17.1875 7.03125 17.1875H5.46875C5.03711 17.1875 4.6875 16.8379 4.6875 16.4062V10.1562C4.6875 9.72461 5.03711 9.375 5.46875 9.375H7.03125C7.46289 9.375 7.8125 9.72461 7.8125 10.1562V16.4062ZM12.5 16.4062C12.5 16.8379 12.1504 17.1875 11.7188 17.1875H10.1562C9.72461 17.1875 9.375 16.8379 9.375 16.4062V5.46875C9.375 5.03711 9.72461 4.6875 10.1562 4.6875H11.7188C12.1504 4.6875 12.5 5.03711 12.5 5.46875V16.4062ZM17.1875 16.4062C17.1875 16.8379 16.8379 17.1875 16.4062 17.1875H14.8438C14.4121 17.1875 14.0625 16.8379 14.0625 16.4062V13.2812C14.0625 12.8496 14.4121 12.5 14.8438 12.5H16.4062C16.8379 12.5 17.1875 12.8496 17.1875 13.2812V16.4062Z" fill="black"/>
                                     </svg>
@@ -69,7 +119,7 @@
                                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM12.1094 4.6875C14.4824 4.6875 16.4062 6.61133 16.4062 8.98438C16.4062 11.3574 14.4824 13.2812 12.1094 13.2812C9.73633 13.2812 7.8125 11.3574 7.8125 8.98438C7.8125 6.61133 9.73633 4.6875 12.1094 4.6875ZM12.1094 21.4844C9.24316 21.4844 6.6748 20.1855 4.95605 18.1543C5.87402 16.4258 7.6709 15.2344 9.76562 15.2344C9.88281 15.2344 10 15.2539 10.1123 15.2881C10.7471 15.4932 11.4111 15.625 12.1094 15.625C12.8076 15.625 13.4766 15.4932 14.1064 15.2881C14.2188 15.2539 14.3359 15.2344 14.4531 15.2344C16.5479 15.2344 18.3447 16.4258 19.2627 18.1543C17.5439 20.1855 14.9756 21.4844 12.1094 21.4844Z" fill="black"/>
                                     </svg>
-                                    <p class="usuario__text text__navbar m-hidden">Bem vindo(a)! Giovana</p>
+                                    <p class="usuario__text text__navbar m-hidden">Bem vindo(a)! {{ request.session.nome }}</p>
                                     <p class="usuario__text text__navbar d-hidden">Minha conta</p>
                                 </a>
                             </li>
@@ -102,7 +152,7 @@
     <div class="container__pagina">
         <div class="usuario__container">
             <div class="usuario__imagem">
-                <img src="assets/icon-user.png" alt="">
+                <img src="{% static 'img/assets/icon-user.png' %}" alt="">
             </div>
     
             <div class="usuario__nome">
@@ -219,6 +269,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script src="{% static 'js/global.js' %}"></script>
+    <script src="{% static 'js/popup.js' %}"></script>
 
 </body>
 </html>

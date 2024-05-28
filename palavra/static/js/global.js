@@ -11,21 +11,21 @@ function adicionarClasseAtiva() {
     });
 }
     
-function verificaCamposVazios() {
-    var filas = document.querySelectorAll('.bloco-palavras__fila');
+// function verificaCamposVazios() {
+//     var filas = document.querySelectorAll('.bloco-palavras__fila');
 
-    filas.forEach(function(fila) {
-        var blocos = document.querySelectorAll('.bloco-palavras__letra');
+//     filas.forEach(function(fila) {
+//         var blocos = document.querySelectorAll('.bloco-palavras__letra');
         
-        blocos.forEach(function(bloco) {
-            if(bloco.textContent == '') {
-                console.log(bloco.textContent);
-            }
-        })
-    })
-}
+//         blocos.forEach(function(bloco) {
+//             if(bloco.textContent == '') {
+//                 console.log(bloco.textContent);
+//             }
+//         })
+//     })
+// }
 
-verificaCamposVazios();
+// verificaCamposVazios();
 
 
 function adicionarLetrasNosCampos() {

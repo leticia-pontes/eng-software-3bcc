@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,20 +8,21 @@
     src="https://kit.fontawesome.com/026675cdf7.js"
     crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style/reset.css">
-    <link rel="stylesheet" href="style/cadastro.css">
-    <link rel="stylesheet" href="style/responsivo_cadastro.css">
-    <link rel="stylesheet" href="style/footer.css">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
     <title>Login e Cadastro</title>
 </head>
 <body>
     <nav class="header">
-                <a href="index.html" class="navbar-brand">
-                    Palavra
-                </a>
-            <div class="header__button">
-                <button type="submit">Jogar</button>
-            </div>
+        <a href="{% url 'index' %}" class="navbar-brand">
+            Palavra
+        </a>
+        <div class="header__button">
+            <button type="submit">Jogar</button>
+        </div>
     </nav>
     <main>
         <div class="container_main">
@@ -28,13 +30,18 @@
                 <div class="login">
                     <h1>entre</h1>
                     <p>Que bom vê-lo(a) novamente!
-                    entre e bora adivinhar uma
-                    palavrinha</p>
-                    <form action="" method="post">
+                        entre e bora adivinhar uma
+                        palavrinha</p>
+                    {% block content %}
+                    <form action="{% url 'jogo' %}" method="post">
+                        {% csrf_token %}
+                        {{ formulario }}
                         <input type="email" name="email" id="email" placeholder="E-mail"><br>
+                        {% comment %} {{formulario.as_p}} {% endcomment %}
                         <input type="password" name="senha" id="senha" placeholder="senha"><br>
                         <button type="submit">Entre</button>
                     </form>
+                    {% endblock content %}
                 </div>
                 <div class="cadastro">
                     <h1>cadastra-se</h1>
@@ -56,7 +63,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 </html>
