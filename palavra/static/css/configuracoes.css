@@ -76,7 +76,8 @@
 }
 
 .usuario__imagem.configuracoes {
-    width: 100px;
+    width: 100%;
+    max-width: 100px;
     height: 100px;
     margin: 0;
 }
