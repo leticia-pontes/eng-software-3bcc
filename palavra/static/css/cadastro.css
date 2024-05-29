@@ -10,7 +10,6 @@
     display: flex;
     align-items: center;
     padding: 17px 0; 
-    margin-bottom: 55px;
     width: 100%;
     box-shadow: 1px 1px 15px #d5d5d5;
     text-align: center;
@@ -38,11 +37,14 @@
     color: var(--cor-primaria);
 }
 
-.header button{
-    margin-right: 40px ;
+.header .pagina__botao-jogar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
     width: 200px;
     height: 50px;
-    background-color: var(--cor-botao-jogar);
+    background-color: #000000;
     color: #FFFFFF;
     border-radius: 20px;
     font-size: 18px;
@@ -54,6 +56,7 @@ main{
 }
 .container_main{
     display: flex;
+    height: 100vh;
     max-width: 1390px;
     margin: 0 auto;
     align-items: center;
@@ -63,7 +66,6 @@ main{
 .content {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
     background-color: rgba(153, 153, 153, 0.22);
     gap: 5px;
 }
