@@ -1,5 +1,6 @@
 
 .titulo-ranking{
+    margin-top:70px;
     padding: 40px 0 0 88px;
     display: flex;
     justify-content: flex-start;
@@ -8,6 +9,10 @@
 .titulo-ranking h1{
     font-size: 34px;
     margin-left: 7px;
+}
+.fa-square-poll-vertical:before 
+{
+    font-size:27px;
 }
 .perfil-usuario{
     padding: 58px 127px 0 67px;
@@ -74,6 +79,12 @@
 }
 
 /*RESPONSIVIDADE*/
+
+@media screen and (max-width: 990px) {
+    .perfil-usuario p{
+        line-height: 1.2;
+    }
+}
 
 @media screen and (max-width: 768px) {
   
