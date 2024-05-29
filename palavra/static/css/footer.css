@@ -20,8 +20,9 @@
     font-weight: 400;
 }
 
-.footer__text span{
-    color: var(--cor-primaria)
+.footer__text a{
+    display: inline;
+    color: var(--cor-primaria);
 }
 
 .tela-entrada .footer {
