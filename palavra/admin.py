@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Cadastro, Tema, Palavra
+from .models import Usuario, Tema, Palavra
 
-admin.site.register(Cadastro)
+admin.site.register(Usuario)
 admin.site.register(Tema)
 admin.site.register(Palavra)

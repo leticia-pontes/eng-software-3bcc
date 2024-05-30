@@ -23,7 +23,7 @@
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Bem vindo(a) {{ request.session.usuario }} </h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Bem vindo(a) {{ nome }} </h5>
                     <button type="button" class="btn-close btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -31,7 +31,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link navbar-item" aria-current="page">
                                 <i class="fa-solid fa-square-parking"></i>
-                                <p class="pontuacao__text text__navbar">0 pontos</p>  
+                                <p class="pontuacao__text text__navbar">{{ pontuacao }} ponto(s)</p>  
                             </a>
                         </li>
                         <li class="nav-item">

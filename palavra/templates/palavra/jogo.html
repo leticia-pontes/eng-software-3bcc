@@ -33,14 +33,6 @@
             padding: 10px;
             background: #fff;
         }
-        .botao-fechar:pointer {
-            cursor: pointer;
-        }
-        .titulo-popup {
-            /* font-size: 34px;
-            color: var(--cor-primaria);
-            line-height: 30px; */
-        }
     </style>
 </head>
 <body>
@@ -55,6 +47,9 @@
             &nbsp;
             <div class="informacoes-popup">
                 <p>Como jogar?</p>&nbsp;
+                <p>A letra<span class="letras-pop__certa"> T </span>faz parte da palavra e está na posição correta.</p>&nbsp;
+                <p>A letra<span class="letras-pop__errada"> R </span>faz parte da palavra mas em outra posição.</p>&nbsp;
+                <p>A letra<span class="letras-pop__nao-tem"> M </span>não faz parte da palavra.</p>&nbsp;
                 <p>Descubra as palavras certas. Depois de cada tentativa, as peças mostram o quão perto você está da solução.</p>&nbsp;
                 <p>Os acentos são preenchidos automaticamente e não são considerados nas dicas.</p>&nbsp;
                 <p>As palavras podem possuir letras repetidas.</p>&nbsp;
@@ -71,22 +66,25 @@
     <div class="container__pagina">
         <div class="usuario__container">
             <div class="usuario__imagem">
-                <img src="{% static 'img/assets/icon-user.png' %}" alt="">
+                {% if usuario and usuario.foto_perfil %}
+                    <img src="{{ usuario.foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
+                {% else %}
+                    <img src="{% static 'img/assets/icon-user.png' %}" alt="Imagem não disponível">
+                {% endif %}
             </div>
     
             <div class="usuario__nome">
-                Usuário
+                {{ nome }}
             </div>
             <div class="usuario__pontos">
-                Pontos: <span id="qtde-pontos">0</span> pontos
+                Pontos: <span id="qtde-pontos">{{ user.pontuacao_total }}</span> pontos
             </div>
     
             <div class="usuario__escolha-tema">
                 <select name="select-tema" class="usuario__select-tema">
-                    <option selected disabled>Tema</option>
-                    <option value="galaxia">Galáxia</option>
-                    <option value="natureza">Natureza</option>
-                    <option value="dinossauro">Dinossauro</option>
+                    {% for tema in temas %}
+                        <option value="{{ tema.descricao|lower }}" class="usuario__select-tema">{{ tema.descricao }}</option>
+                    {% endfor %}
                 </select>
             </div>
         </div>
