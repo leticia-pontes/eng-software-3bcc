@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Cadastro, Tema, Palavra
+
+admin.site.register(Cadastro)
+admin.site.register(Tema)
+admin.site.register(Palavra)

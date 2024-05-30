@@ -1,0 +1,132 @@
+.header__content {
+    display: flex;
+    padding: 15px 44px 15px 72px;
+    justify-content: space-between;
+    max-width: 1325px;
+    margin: 0 auto;
+}
+
+.header__logo svg{
+    width: 50px;
+    height: 50px;
+}
+
+.header__botoes {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header__botao-entrar, .header__botao-cadastrar {
+    display:flex;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.pagina__conteudo {
+    display: flex;
+    align-items: center;
+    max-width: 1194px;
+    margin: 0 auto 0;
+    gap: 120px;
+    justify-content: space-between;
+    padding: 30px 45px;
+}
+
+.pagina__texto {
+    font-size: 31px;
+    line-height: 38px;
+    margin-bottom: 48px;
+    max-width: 585px;
+    white-space: pre-line;
+}
+
+.pagina__texto:after{
+    content: '|';
+    margin-left: 5px;
+    opacity: 1;
+    animation: pisca .7s infinite;
+}
+
+@keyframes pisca{
+    0%, 100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+}
+
+.pagina__jogar .pagina__botao-jogar {
+    display: flex;
+    background: #000;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    width: 150px;
+    text-align: center;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.pagina__container-cubo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.pagina__container-cubo .pagina__cubo svg {
+    max-width: 344px;
+    width: 100%;
+    transition: .5s;
+}
+
+.pagina__container-cubo .pagina__cubo svg rect {
+    
+    transition: .5s;
+}
+
+/* CUBO */
+.pagina__cubo svg :nth-child(6):hover, .pagina__cubo svg :nth-child(7):hover, .pagina__cubo svg :nth-child(8):hover, .pagina__cubo svg :nth-child(9):hover, .pagina__cubo svg :nth-child(10):hover {
+    transition: 1s;
+    fill:#088d86;
+}
+.pagina__cubo svg :nth-child(5):hover {
+    transition: 1s;
+    fill:#fec90b;
+}
+.pagina__nome-palavra {
+    font-size: 54px;
+    line-height: 58px;
+    color: var(--cor-primaria);
+}
+
+@media (max-width: 740px) {
+    .pagina__conteudo {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 60px;
+        padding: 30px 25px 60px;
+    }
+    .tela-entrada .footer {
+        position: relative;
+    }
+    .header__content{
+        padding: 15px 25px 15px 25px;
+    }
+    .header__botoes{
+        flex-direction: column;
+    }
+}

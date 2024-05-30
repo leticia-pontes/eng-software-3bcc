@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
+    <title>Palavra</title>
+</head>
+<body class="tela-entrada">
+    <nav class="header">
+        <div class="header__content">
+            <div class="header__logo">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="16.6667" height="16.5289" rx="3" fill="white"/>
+                    <rect x="0.5" y="0.5" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect x="16.6667" width="16.6667" height="16.5289" rx="3" fill="white"/>
+                    <rect x="17.1667" y="0.5" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect x="33.3333" width="16.6667" height="16.5289" rx="3" fill="white"/>
+                    <rect x="33.8333" y="0.5" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect y="16.7355" width="16.6667" height="16.5289" rx="3" fill="white"/>
+                    <rect x="0.5" y="17.2355" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect x="16.6667" y="16.7355" width="16.6667" height="16.5289" rx="3" fill="#FFD952"/>
+                    <rect x="17.1667" y="17.2355" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect x="33.3333" y="16.7355" width="16.6667" height="16.5289" rx="3" fill="var(--cor-primaria)"/>
+                    <rect x="33.8333" y="17.2355" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect y="33.4711" width="16.6667" height="16.5289" rx="3" fill="var(--cor-primaria)"/>
+                    <rect x="0.5" y="33.9711" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect x="16.6667" y="33.4711" width="16.6667" height="16.5289" rx="3" fill="var(--cor-primaria)"/>
+                    <rect x="17.1667" y="33.9711" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                    <rect x="33.3333" y="33.4711" width="16.6667" height="16.5289" rx="3" fill="var(--cor-primaria)"/>
+                    <rect x="33.8333" y="33.9711" width="15.6667" height="15.5289" rx="2.5" stroke="#999999" stroke-opacity="0.5"/>
+                </svg>        
+            </div>
+
+            <div class="header__botoes">
+                <a href="{% url 'cadastro' %}" class="header__botao-entrar">
+                    Entre
+                </a>
+                
+                <a href="{% url 'cadastro' %}" class="header__botao-cadastrar">
+                    Cadastre-se
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pagina__conteudo">
+
+        <div class="pagina__informacoes">
+            <div class="pagina__texto">
+                Qual será a palavra de hoje?
+                Algum tema em mente?
+                Você tem 6 chances de descobrir uma palavra de 5 letras 👀     
+            </div>
+
+            <div class="pagina__jogar">
+                <a href="{% url 'jogo' %}" class="pagina__botao-jogar">
+                    jogar
+                </a>
+            </div>
+        </div>
+
+        <div class="pagina__container-cubo">
+            <div class="pagina__cubo">
+                <svg width="344" height="346" viewBox="0 0 344 346" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="113.667" height="113.38" rx="9.5" fill="white" stroke="#999999"/>
+                    <rect x="115.167" y="0.5" width="113.667" height="113.38" rx="9.5" fill="white" stroke="#999999"/>
+                    <rect x="229.833" y="0.5" width="113.667" height="113.38" rx="9.5" fill="white" stroke="#999999"/>
+                    <rect x="0.5" y="116.31" width="113.667" height="113.38" rx="9.5" fill="white" stroke="#999999"/>
+                    <rect x="115.167" y="116.31" width="113.667" height="113.38" rx="9.5" fill="#FFD952" stroke="#999999"/>
+                    <rect x="229.833" y="116.31" width="113.667" height="113.38" rx="9.5" fill="#0CCABA" stroke="#999999"/>
+                    <rect x="0.5" y="232.12" width="113.667" height="113.38" rx="9.5" fill="#0CCABA" stroke="#999999"/>
+                    <rect x="115.167" y="232.12" width="113.667" height="113.38" rx="9.5" fill="#0CCABA" stroke="#999999"/>
+                    <rect x="229.833" y="232.12" width="113.667" height="113.38" rx="9.5" fill="#0CCABA" stroke="#999999"/>
+                </svg>     
+            </div>
+
+            <div class="pagina__nome-palavra">
+                palavra
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer__content">
+            <div class="footer__text">
+                Palavra - projeto de engenharia de software - inspirado no jogo <span>wordle</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/global.js' %}"></script>
+</body>
+</html>

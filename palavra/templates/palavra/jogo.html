@@ -1,0 +1,275 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jogo.css' %}">
+    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
+
+    <title>Palavra</title>
+    <style>
+        .container-layout{
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            position: absolute;
+        }
+        .container-popup{
+            display: block;
+            z-index: 10;
+            height: 500px;
+            width: 650px;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fff;
+        }
+        .botao-fechar:pointer {
+            cursor: pointer;
+        }
+        titulo-popup {
+            {% comment %} font-size: 34px; {% endcomment %}
+            color: var(--cor-primaria);
+            {% comment %} line-height: 30px; {% endcomment %}
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- POPUP -->
+    <div class="container-layout">
+        <div id="container-popup" class="container-popup">
+            <div class="header-popup">
+                <span class="titulo-popup">PALAVRA</span>
+                <span class="botao-fechar" id="fechar-popup">&times;</span>
+            </div>
+            &nbsp;
+            <div class="informacoes-popup">
+                <p>Como jogar?</p>&nbsp;
+                <p>Descubra as palavras certas. Depois de cada tentativa, as peças mostram o quão perto você está da solução.</p>&nbsp;
+                <p>Os acentos são preenchidos automaticamente e não são considerados nas dicas.</p>&nbsp;
+                <p>As palavras podem possuir letras repetidas.</p>&nbsp;
+                <p>Uma palavra nova aparece a cada dia.</p>&nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <nav class="header">
+        <div class="navbar navbar-expand-lg header__content" aria-label="Offcanvas navbar large">
+            <div class="container-fluid">
+                <div class="header__left m-hidden">
+                    <div class="menu">
+                        <a href="#" class="navbar-brand">
+                            <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.78125 3.51562H21.0938C21.5252 3.51562 21.875 3.16587 21.875 2.73438V0.78125C21.875 0.349756 21.5252 0 21.0938 0H0.78125C0.349756 0 0 0.349756 0 0.78125V2.73438C0 3.16587 0.349756 3.51562 0.78125 3.51562ZM0.78125 11.3281H21.0938C21.5252 11.3281 21.875 10.9784 21.875 10.5469V8.59375C21.875 8.16226 21.5252 7.8125 21.0938 7.8125H0.78125C0.349756 7.8125 0 8.16226 0 8.59375V10.5469C0 10.9784 0.349756 11.3281 0.78125 11.3281ZM0.78125 19.1406H21.0938C21.5252 19.1406 21.875 18.7909 21.875 18.3594V16.4062C21.875 15.9748 21.5252 15.625 21.0938 15.625H0.78125C0.349756 15.625 0 15.9748 0 16.4062V18.3594C0 18.7909 0.349756 19.1406 0.78125 19.1406Z" fill="black"/>
+                            </svg>   
+                        </a>
+                    </div>
+                    <div class="suporte">
+                        <a href="#">
+                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24.2188 12.1094C24.2188 18.7987 18.7967 24.2188 12.1094 24.2188C5.42202 24.2188 0 18.7987 0 12.1094C0 5.42397 5.42202 0 12.1094 0C18.7967 0 24.2188 5.42397 24.2188 12.1094ZM12.4343 4.00391C9.77334 4.00391 8.07617 5.12485 6.74346 7.11709C6.5708 7.3752 6.62856 7.72329 6.87603 7.91094L8.57031 9.19561C8.82446 9.38833 9.18657 9.34248 9.38403 9.09199C10.2563 7.98564 10.8544 7.34409 12.182 7.34409C13.1795 7.34409 14.4134 7.98608 14.4134 8.95337C14.4134 9.68462 13.8097 10.0602 12.8248 10.6124C11.6762 11.2563 10.1562 12.0577 10.1562 14.0625V14.2578C10.1562 14.5814 10.4186 14.8438 10.7422 14.8438H13.4766C13.8001 14.8438 14.0625 14.5814 14.0625 14.2578V14.1927C14.0625 12.803 18.1243 12.7451 18.1243 8.98438C18.1243 6.15225 15.1866 4.00391 12.4343 4.00391ZM12.1094 16.1133C10.8708 16.1133 9.86328 17.1208 9.86328 18.3594C9.86328 19.5979 10.8708 20.6055 12.1094 20.6055C13.3479 20.6055 14.3555 19.5979 14.3555 18.3594C14.3555 17.1208 13.3479 16.1133 12.1094 16.1133Z" fill="black"/>
+                            </svg>   
+                        </a>
+                    </div>
+                </div>
+                <div class="header__logo">
+                    <a href="{% url 'index' %}" class="navbar-brand">
+                        <span>Palavra</span>
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Bem vindo(a) {{ request.session.usuario }} </h5>
+                        <button type="button" class="btn-close btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 header__right">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link navbar-item" aria-current="page">
+                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.5312 0H2.34375C1.0498 0 0 1.0498 0 2.34375V19.5312C0 20.8252 1.0498 21.875 2.34375 21.875H19.5312C20.8252 21.875 21.875 20.8252 21.875 19.5312V2.34375C21.875 1.0498 20.8252 0 19.5312 0ZM11.7188 14.0625H9.375V16.4062C9.375 16.8359 9.02344 17.1875 8.59375 17.1875H7.03125C6.60156 17.1875 6.25 16.8359 6.25 16.4062V5.46875C6.25 5.03906 6.60156 4.6875 7.03125 4.6875H11.7188C14.3018 4.6875 16.4062 6.79199 16.4062 9.375C16.4062 11.958 14.3018 14.0625 11.7188 14.0625ZM11.7188 7.8125H9.375V10.9375H11.7188C12.5781 10.9375 13.2812 10.2344 13.2812 9.375C13.2812 8.51562 12.5781 7.8125 11.7188 7.8125Z" fill="black"/>
+                                    </svg>
+                                    <p class="pontuacao__text text__navbar">0 pontos</p>  
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link navbar-item" href="{% url 'ranking' %}">
+                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.5312 0H2.34375C1.0498 0 0 1.0498 0 2.34375V19.5312C0 20.8252 1.0498 21.875 2.34375 21.875H19.5312C20.8252 21.875 21.875 20.8252 21.875 19.5312V2.34375C21.875 1.0498 20.8252 0 19.5312 0ZM7.8125 16.4062C7.8125 16.8379 7.46289 17.1875 7.03125 17.1875H5.46875C5.03711 17.1875 4.6875 16.8379 4.6875 16.4062V10.1562C4.6875 9.72461 5.03711 9.375 5.46875 9.375H7.03125C7.46289 9.375 7.8125 9.72461 7.8125 10.1562V16.4062ZM12.5 16.4062C12.5 16.8379 12.1504 17.1875 11.7188 17.1875H10.1562C9.72461 17.1875 9.375 16.8379 9.375 16.4062V5.46875C9.375 5.03711 9.72461 4.6875 10.1562 4.6875H11.7188C12.1504 4.6875 12.5 5.03711 12.5 5.46875V16.4062ZM17.1875 16.4062C17.1875 16.8379 16.8379 17.1875 16.4062 17.1875H14.8438C14.4121 17.1875 14.0625 16.8379 14.0625 16.4062V13.2812C14.0625 12.8496 14.4121 12.5 14.8438 12.5H16.4062C16.8379 12.5 17.1875 12.8496 17.1875 13.2812V16.4062Z" fill="black"/>
+                                    </svg>
+                                    <p class="pontuacao__text text__navbar d-hidden">Ranking</p>  
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link navbar-item" href="#">
+                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM12.1094 4.6875C14.4824 4.6875 16.4062 6.61133 16.4062 8.98438C16.4062 11.3574 14.4824 13.2812 12.1094 13.2812C9.73633 13.2812 7.8125 11.3574 7.8125 8.98438C7.8125 6.61133 9.73633 4.6875 12.1094 4.6875ZM12.1094 21.4844C9.24316 21.4844 6.6748 20.1855 4.95605 18.1543C5.87402 16.4258 7.6709 15.2344 9.76562 15.2344C9.88281 15.2344 10 15.2539 10.1123 15.2881C10.7471 15.4932 11.4111 15.625 12.1094 15.625C12.8076 15.625 13.4766 15.4932 14.1064 15.2881C14.2188 15.2539 14.3359 15.2344 14.4531 15.2344C16.5479 15.2344 18.3447 16.4258 19.2627 18.1543C17.5439 20.1855 14.9756 21.4844 12.1094 21.4844Z" fill="black"/>
+                                    </svg>
+                                    <p class="usuario__text text__navbar m-hidden">Bem vindo(a)! {{ request.session.nome }}</p>
+                                    <p class="usuario__text text__navbar d-hidden">Minha conta</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link navbar-item" href="{% url 'configuracoes' %}">
+                                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22.8885 15.0196L20.8084 13.8184C21.0184 12.6856 21.0184 11.5235 20.8084 10.3907L22.8885 9.1895C23.1277 9.05278 23.2352 8.76958 23.157 8.50591C22.615 6.76762 21.6922 5.19536 20.4861 3.88676C20.3006 3.68657 19.9979 3.63774 19.7635 3.77446L17.6834 4.97563C16.8094 4.22368 15.8035 3.64262 14.7147 3.26176V0.864303C14.7147 0.590866 14.5242 0.351608 14.2557 0.293014C12.4637 -0.107376 10.6277 -0.0878449 8.92364 0.293014C8.65508 0.351608 8.46465 0.590866 8.46465 0.864303V3.26665C7.38067 3.65239 6.37481 4.23344 5.4959 4.98051L3.42071 3.77934C3.18145 3.64262 2.8836 3.68657 2.69805 3.89165C1.492 5.19536 0.569146 6.76762 0.0271543 8.51079C-0.0558535 8.77446 0.0564511 9.05766 0.295709 9.19438L2.37579 10.3956C2.16583 11.5284 2.16583 12.6905 2.37579 13.8233L0.295709 15.0245C0.0564511 15.1612 -0.0509707 15.4444 0.0271543 15.7081C0.569146 17.4463 1.492 19.0186 2.69805 20.3272C2.8836 20.5274 3.18633 20.5762 3.42071 20.4395L5.50079 19.2383C6.37481 19.9903 7.38067 20.5713 8.46954 20.9522V23.3545C8.46954 23.628 8.65997 23.8672 8.92852 23.9258C10.7205 24.3262 12.5565 24.3067 14.2606 23.9258C14.5291 23.8672 14.7195 23.628 14.7195 23.3545V20.9522C15.8035 20.5665 16.8094 19.9854 17.6883 19.2383L19.7684 20.4395C20.0076 20.5762 20.3055 20.5323 20.491 20.3272C21.6971 19.0235 22.6199 17.4512 23.1619 15.7081C23.2352 15.4395 23.1277 15.1563 22.8885 15.0196ZM11.5897 16.0108C9.43633 16.0108 7.6834 14.2579 7.6834 12.1045C7.6834 9.95122 9.43633 8.19829 11.5897 8.19829C13.743 8.19829 15.4959 9.95122 15.4959 12.1045C15.4959 14.2579 13.743 16.0108 11.5897 16.0108Z" fill="black"/>
+                                    </svg>
+                                    <p class="pontuacao__text text__navbar d-hidden">Configurações</p>  
+                                </a>
+                            </li>
+                            <li class="nav-item d-hidden">
+                                <a class="nav-link navbar-item" href="#">
+                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.2188 12.1094C24.2188 18.7987 18.7967 24.2188 12.1094 24.2188C5.42202 24.2188 0 18.7987 0 12.1094C0 5.42397 5.42202 0 12.1094 0C18.7967 0 24.2188 5.42397 24.2188 12.1094ZM12.4343 4.00391C9.77334 4.00391 8.07617 5.12485 6.74346 7.11709C6.5708 7.3752 6.62856 7.72329 6.87603 7.91094L8.57031 9.19561C8.82446 9.38833 9.18657 9.34248 9.38403 9.09199C10.2563 7.98564 10.8544 7.34409 12.182 7.34409C13.1795 7.34409 14.4134 7.98608 14.4134 8.95337C14.4134 9.68462 13.8097 10.0602 12.8248 10.6124C11.6762 11.2563 10.1562 12.0577 10.1562 14.0625V14.2578C10.1562 14.5814 10.4186 14.8438 10.7422 14.8438H13.4766C13.8001 14.8438 14.0625 14.5814 14.0625 14.2578V14.1927C14.0625 12.803 18.1243 12.7451 18.1243 8.98438C18.1243 6.15225 15.1866 4.00391 12.4343 4.00391ZM12.1094 16.1133C10.8708 16.1133 9.86328 17.1208 9.86328 18.3594C9.86328 19.5979 10.8708 20.6055 12.1094 20.6055C13.3479 20.6055 14.3555 19.5979 14.3555 18.3594C14.3555 17.1208 13.3479 16.1133 12.1094 16.1133Z" fill="black"/>
+                                    </svg>
+                                    <p class="usuario__text text__navbar d-hidden">Ajuda</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    
+    <!-- USUARIO JOGANDO -->
+
+    <div class="container__pagina">
+        <div class="usuario__container">
+            <div class="usuario__imagem">
+                <img src="{% static 'img/assets/icon-user.png' %}" alt="">
+            </div>
+    
+            <div class="usuario__nome">
+                Usuário
+            </div>
+            <div class="usuario__pontos">
+                Pontos: <span id="qtde-pontos">0</span> pontos
+            </div>
+    
+            <div class="usuario__escolha-tema">
+                <select name="select-tema" class="usuario__select-tema">
+                    <option selected disabled>Tema</option>
+                    <option value="galaxia">Galáxia</option>
+                    <option value="natureza">Natureza</option>
+                    <option value="dinossauro">Dinossauro</option>
+                </select>
+            </div>
+        </div>
+    
+        <!-- PALAVRAS -->
+        <div class="bloco-palavras__container">
+            <div class="bloco-palavras__fila fila_1 active">
+                <div class="bloco-palavras__letra">t</div>
+                <div class="bloco-palavras__letra">e</div>
+                <div class="bloco-palavras__letra">s</div>
+                <div class="bloco-palavras__letra">t</div>
+                <div class="bloco-palavras__letra">e</div>
+            </div>
+    
+            <div class="bloco-palavras__fila fila_2">
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+            </div>
+    
+            <div class="bloco-palavras__fila fila_3">
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+            </div>
+    
+            <div class="bloco-palavras__fila fila_4">
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+            </div>
+    
+            <div class="bloco-palavras__fila fila_5">
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+            </div>
+    
+            <div class="bloco-palavras__fila fila_6">
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+                <div class="bloco-palavras__letra"></div>
+            </div>
+        </div>
+    
+        <div class="teclado__container">
+            <div class="teclado__content">
+                <button class="teclado__tecla tecla_q">Q</button>
+                <button class="teclado__tecla tecla_w">W</button>
+                <button class="teclado__tecla tecla_e">E</button>
+                <button class="teclado__tecla tecla_r">R</button>
+                <button class="teclado__tecla tecla_t">T</button>
+                <button class="teclado__tecla tecla_y">Y</button>
+                <button class="teclado__tecla tecla_u">U</button>
+                <button class="teclado__tecla tecla_i">I</button>
+                <button class="teclado__tecla tecla_o">O</button>
+                <button class="teclado__tecla tecla_p">P</button>
+                <button class="teclado__tecla tecla_a">A</button>
+                <button class="teclado__tecla tecla_s">S</button>
+                <button class="teclado__tecla tecla_d">D</button>
+                <button class="teclado__tecla tecla_f">F</button>
+                <button class="teclado__tecla tecla_g">G</button>
+                <button class="teclado__tecla tecla_h">H</button>
+                <button class="teclado__tecla tecla_j">J</button>
+                <button class="teclado__tecla tecla_k">K</button>
+                <button class="teclado__tecla tecla_l">L</button>
+                <button class="teclado__tecla tecla_z">Z</button>
+                <button class="teclado__tecla tecla_x">X</button>
+                <button class="teclado__tecla tecla_c">C</button>
+                <button class="teclado__tecla tecla_v">V</button>
+                <button class="teclado__tecla tecla_b">B</button>
+                <button class="teclado__tecla tecla_n">N</button>
+                <button class="teclado__tecla tecla_m">M</button>
+            </div>
+        </div>
+
+    </div>
+    
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer__content">
+            <div class="footer__text">
+                Palavra - projeto de engenharia de software - inspirado no jogo <span>wordle</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="{% static 'js/global.js' %}"></script>
+    <script src="{% static 'js/popup.js' %}"></script>
+
+</body>
+</html>
