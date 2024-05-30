@@ -1,3 +1,36 @@
+.titulo-popup {
+    color: var(--cor-primaria);
+    position: absolute;
+    margin: 0 auto;
+    left: 44.1%;
+    top: 19.5%;
+    font-size: 34px;
+}
+
+.botao-fechar {
+    position: absolute;
+    left: 69%;
+    right: 7.08%;
+    top: 19%;
+    bottom: 93.79%;
+    font-size: 25px;
+}
+
+.informacoes-popup {
+    margin-top: 10%;
+}
+
+p .letras-popup__certa {
+    color: yellow;
+    /* display: inline-block;
+    padding: 5px 10px;
+    background-color: #ffcc00;
+    border-radius: 5px;
+    color: #ffffff; 
+    font-size: 24px;
+    font-weight: bold; */
+}
+
 .bloco-palavras__container {
     max-width: 452px;
     margin: 0 auto;
@@ -72,6 +105,13 @@
     box-shadow: var(--borda-box-shadow);
 }
 
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .usuario__nome, .usuario__pontos {
     font-size: 20px;
     margin-bottom: 12px;
@@ -122,6 +162,10 @@
     border-radius: 5px;
     box-shadow: var(--borda-box-shadow);
     color: var(--cor-letra-teclado);
+}
+
+.login-error {
+    color: red;
 }
 
 @media (max-width: 1070px) {

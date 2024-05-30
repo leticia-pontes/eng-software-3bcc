@@ -1,25 +1,51 @@
-from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db import models
 
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, nome, senha=None):
+        if not email:
+            raise ValueError('O E-mail é obrigatório!')
+        if not nome:
+            raise ValueError('O Nome é obrigatório!')
 
-## OS COMENTÁRIOS SÃO OS CAMPOS QUE AINDA PRECISAM SER IMPLEMENTADOS
+        email = self.normalize_email(email)
+        user = self.model(email=email, nome=nome)
+        user.set_password(senha)
+        user.save(using=self._db)
+        return user
 
-# Senha
-class Cadastro(models.Model):
-    nome    = models.CharField(max_length=60)
-    usuario = models.CharField(max_length=16)
-    email   = models.CharField(max_length=40)
-    senha   = models.CharField(max_length=30)
-    pontuacao_total = models.IntegerField()
+    def create_superuser(self, email, nome, senha=None):
+        user = self.create_user(email, nome, senha)
+        user.is_active = True
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
 
-    def set_senha(self, senha_crua):
-        self.senha = make_password(senha_crua)
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    nome = models.CharField(max_length=60, unique=True)
+    email = models.EmailField(max_length=40, unique=True)
+    senha = models.CharField(max_length=25)
+    pontuacao_total = models.IntegerField(default=0)
+    foto_perfil = models.ImageField(upload_to='foto_perfil/')
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
 
-    def verificar_senha(self, senha_crua):
-        return check_password(senha_crua, self.senha)
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'nome'
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.usuario
+        return self.nome
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    @property
+    def is_superuser(self):
+        return self.is_admin
         
 class Tema(models.Model):
     descricao = models.CharField(max_length=20)

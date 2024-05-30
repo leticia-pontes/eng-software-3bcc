@@ -27,21 +27,31 @@
     <main>
         <div class="container_main">
             <div class="content">
-                <div class="cadastro">
-                    <h1>cadastra-se</h1>
-                    <p class="subtitulo">Não tem uma conta ainda? cadastre-se!</p>
+                <div class="login">
+                    <h1>entre</h1>
+                    <p>Que bom vê-lo(a) novamente!
+                        entre e bora adivinhar uma
+                        palavrinha</p>
                     <form method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">cadastrar</button>
+                        <input type="text" name="usuario" id="usuario" placeholder="usuário" required><br>
+                        <input type="password" name="senha" id="senha" placeholder="senha", required><br>
+                        <button type="submit">Entrar</button>
                     </form>
+                    {% if error %}
+                        <p class="login-error" id="login-error">{{ error }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- FOOTER -->
-    {% include "footer.html" %}
+    <div class="footer">
+        <div class="footer__content">
+            <div class="footer__text">
+                <p>Palavra - projeto de engenharia de software - inspirado no jogo <a href="https://www.nytimes.com/games/wordle/index.html">wordle</a></p>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

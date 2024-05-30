@@ -31,51 +31,53 @@
                                 <img src="imagens/usuario.png" alt="usuário">
                             </div>
                             <div class="nome-usuario">
-                                <p>Nome do usuário</p>
+                                <p>{{ nome }}</p>
                                 <p>Posição do ranking: 1º</p>
                             </div>
                         </div>
                         <div class="pontuacao">
-                            <span>100</span><span> pontos</span>
+                            <span>{{ pontuacao }} ponto(s)</span>
                         </div>
                     </div>
                     <div class="ranking">
-                        <div class="usuario">
-                            <div class="trofeu-e-nome">
-                                <img src="imagens/trofeu.png" alt="imagem de troféu dourado">
-                                <p>1° - nome do usuário</p>
+                        {% for usuario in top_cinco %}
+                            <div class="usuario">
+                                <div class="trofeu-e-nome">
+                                    <img src="{% static 'img/trofeu.png' %}" alt="imagem de troféu dourado">
+                                    <p>{{ usuario.nome }}</p>
+                                </div>
+                                <div class="pontuacao-usuario">
+                                    <span>{{ usuario.pontuacao_total }} ponto(s)</span>
+                                </div>
                             </div>
-                            <div class="pontuacao-usuario">
-                                <span>100</span><span> pontos</span>
+                            {% comment %} <div class="usuario">
+                                <div class="trofeu-e-nome">
+                                    <img src="{% static 'img/trofeu.png' %}" alt="imagem de troféu dourado">
+                                    <p>1° - nome do usuário</p>
+                                </div>
+                                <div class="pontuacao-usuario">
+                                    <span>100</span><span> pontos</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="usuario">
-                            <div class="trofeu-e-nome">
-                                <img src="imagens/trofeu.png" alt="imagem de troféu dourado">
-                                <p>1° - nome do usuário</p>
+                            <div class="usuario">
+                                <div class="trofeu-e-nome">
+                                    <img src="{% static 'img/trofeu.png' %}" alt="imagem de troféu dourado">
+                                    <p>1° - nome do usuário</p>
+                                </div>
+                                <div class="pontuacao-usuario">
+                                    <span>100</span><span> pontos</span>
+                                </div>
                             </div>
-                            <div class="pontuacao-usuario">
-                                <span>100</span><span> pontos</span>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <div class="trofeu-e-nome">
-                                <img src="imagens/trofeu.png" alt="imagem de troféu dourado">
-                                <p>1° - nome do usuário</p>
-                            </div>
-                            <div class="pontuacao-usuario">
-                                <span>100</span><span> pontos</span>
-                            </div>
-                        </div>
-                        <div class="usuario">
-                            <div class="trofeu-e-nome">
-                                <img src="imagens/trofeu.png" alt="imagem de troféu dourado">
-                                <p>1° - nome do usuário</p>
-                            </div>
-                            <div class="pontuacao-usuario">
-                                <span>100</span><span> pontos</span>
-                            </div>
-                        </div>
+                            <div class="usuario">
+                                <div class="trofeu-e-nome">
+                                    <img src="{% static 'img/trofeu.png' %}" alt="imagem de troféu dourado">
+                                    <p>1° - nome do usuário</p>
+                                </div>
+                                <div class="pontuacao-usuario">
+                                    <span>100</span><span> pontos</span>
+                                </div>
+                            </div> {% endcomment %}
+                        {% endfor %}
                     </div>
                 
             </div>
