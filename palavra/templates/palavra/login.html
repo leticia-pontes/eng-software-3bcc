@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
-    <title>Login e Cadastro</title>
+    <title>Login</title>
 </head>
 <body>
     <nav class="header">
@@ -34,8 +34,9 @@
                         palavrinha</p>
                     <form method="post">
                         {% csrf_token %}
-                        <input type="text" name="usuario" id="usuario" placeholder="usuário" required><br>
-                        <input type="password" name="senha" id="senha" placeholder="senha", required><br>
+                        {{ form.as_p }}
+                        {% comment %} <input type="email" name="email" id="email" placeholder="e-mail" required><br>
+                        <input type="password" name="senha" id="senha" placeholder="senha", required><br> {% endcomment %}
                         <button type="submit">Entrar</button>
                     </form>
                     {% if error %}

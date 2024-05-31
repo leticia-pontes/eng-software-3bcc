@@ -72,28 +72,38 @@
                     <div id="content1" class="configuracoes__content active">
                         <div class="configuracoes__perfil">
                             <div class="configuracoes__imagem-perfil">
-                                <div class="usuario__imagem configuracoes">
-                                    <img src="{% static 'img/assets/icon-user.png' %}" alt="">
-                                </div>
-                                Selecione  uma imagem de perfil
+                                {% if foto_perfil %}
+                                    <img src="{{ foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
+                                {% else %}
+                                    <img src="{% static 'img/assets/icon-user.png' %}" alt="Imagem não disponível">
+                                {% endif %}
+                                Selecione uma imagem de perfil
                             </div>
                             <div class="configuracoes__form-control">
-                                <input type="text" name="nomeUser" placeholder="NOME">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {% comment %} <div class="cadastro">
+                                        <label for="{{ form.username.id_for_label }}">Nome de Usuário:</label>
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="cadastro">
+                                        <label for="{{ form.email.id_for_label }}">E-mail:</label>
+                                        {{ form.email }}
+                                    </div>
+                                    <div class="cadastro">
+                                        <label for="{{ form.password1.id_for_label }}">Senha:</label>
+                                        {{ form.password1 }}
+                                    </div> {% endcomment %}
 
-                                <input type="email" name="emailUser" placeholder="EMAIL">
+                                    <input type="text" name="username" placeholder="NOME">
+                                    <input type="email" name="email" placeholder="EMAIL">
+                                    <input type="password" name="password" placeholder="SENHA">
+                                    <button type="submit">Salvar Alterações</button>
 
-                                <input type="password" name="senhaUser" placeholder="SENHA">
-
-                                <select name="select-pais" class="configuracoes__select-pais">
-                                    <option selected disabled>País</option>
-                                    <option value="brasil">Brasil</option>
-                                    <option value="teste">Teste</option>
-                                    <option value="teste">Teste</option>
-                                </select>
-
-                                <a href="#" class="configuracoes__button">
-                                    Atualizar
-                                </a>
+                                    {% comment %} <a href="#" class="configuracoes__button">
+                                        Atualizar
+                                    </a> {% endcomment %}
+                                </form>
                             </div>
                         </div>
                     </div>

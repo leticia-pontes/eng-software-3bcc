@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
-    <title>Login e Cadastro</title>
+    <title>Cadastro</title>
 </head>
 <body>
     <nav class="header">
@@ -28,17 +28,32 @@
         <div class="container_main">
             <div class="content">
                 <div class="cadastro">
-                    <h1>cadastra-se</h1>
-                    <p class="subtitulo">Não tem uma conta ainda? cadastre-se!</p>
+                    <h1>Cadastre-se</h1>
+                    <p class="subtitulo">Não tem uma conta ainda? Cadastre-se!</p>
                     <form method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">cadastrar</button>
+                        <div class="cadastro">
+                            <label for="{{ form.username.id_for_label }}">Nome de Usuário:</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="cadastro">
+                            <label for="{{ form.email.id_for_label }}">E-mail:</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="cadastro">
+                            <label for="{{ form.password1.id_for_label }}">Senha:</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="cadastro">
+                            <label for="{{ form.password2.id_for_label }}">Confirme a Senha:</label>
+                            {{ form.password2 }}
+                        </div>
+                        <button type="submit">Cadastrar</button>
                     </form>
                 </div>
             </div>
         </div>
-    </main>
+    </main>    
 
     <!-- FOOTER -->
     {% include "footer.html" %}

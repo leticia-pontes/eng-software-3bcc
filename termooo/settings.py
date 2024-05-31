@@ -83,8 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'palavra.context_processors.usuario',
-                'palavra.context_processors.pontuacao',
+                'palavra.context_processors.header_context',
             ],
         },
     },
@@ -122,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'palavra.Usuario'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

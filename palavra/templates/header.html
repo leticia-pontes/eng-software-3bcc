@@ -22,10 +22,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Bem vindo(a) {{ nome }} </h5>
-                    <button type="button" class="btn-close btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 header__right">
                         <li class="nav-item">
@@ -43,7 +39,7 @@
                         <li class="nav-item">
                             <a class="nav-link navbar-item" href="#">
                                 <i class="fa-solid fa-circle-user"></i>
-                                <p class="usuario__text text__navbar m-hidden">Bem vindo(a)! {{ request.session.nome }}</p>
+                                <p class="usuario__text text__navbar m-hidden">Bem vindo(a)! {{ nome }}</p>
                                 <p class="usuario__text text__navbar d-hidden">Minha conta</p>
                             </a>
                         </li>
