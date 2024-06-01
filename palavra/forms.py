@@ -1,58 +1,49 @@
+# forms.py
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django import forms
-from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import Usuario
 
-class LoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'name': 'email',
-        'id': 'email',
-        'placeholder': 'E-mail',
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label='Nome de Usuário', widget=forms.TextInput(attrs={
+        'placeholder': 'Nome de Usuário',
         'required': 'required',
         'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
     }))
-    senha = forms.CharField(widget=forms.PasswordInput(attrs={
-        'name': 'senha',
-        'id': 'senha',
+    password = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={
         'placeholder': 'Senha',
         'required': 'required',
         'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
     }))
 
+    error_messages = {
+        'invalid_login': (
+            "Por favor, entre com um usuário e senha corretos. "
+            "Note que ambos os campos diferenciam maiúsculas e minúsculas."
+        ),
+        'inactive': ("Esta conta está inativa."),
+    }
 
-class CadastroForm(forms.ModelForm):
-    nome = forms.CharField(widget=forms.TextInput(attrs={
-        'name': 'nome',
-        'id': 'nome',
-        'placeholder': 'Usuário',
-        'required': 'required',
-        'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
-    }))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'name': 'email',
-        'id': 'email',
+class CadastroForm(UserCreationForm):
+    email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={
         'placeholder': 'E-mail',
-        'required': 'required',
-        'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
+        'class': 'form-control'
     }))
-    senha = forms.CharField(widget=forms.PasswordInput(attrs={
-        'name': 'senha',
-        'id': 'senha',
+    username = forms.CharField(label='Nome de Usuário', widget=forms.TextInput(attrs={
+        'placeholder': 'Nome de Usuário',
+        'class': 'form-control'
+    }))
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={
         'placeholder': 'Senha',
-        'required': 'required',
-        'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
+        'class': 'form-control'
     }))
-    # confirma_senha = forms.CharField(widget=forms.PasswordInput(attrs={
-    #     'name': 'confirma_senha',
-    #     'id': 'confirma_senha',
-    #     'placeholder': 'Senha',
-    #     'required': 'required',
-    #     'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
-    # }))
+    password2 = forms.CharField(label='Confirme a Senha', widget=forms.PasswordInput(attrs={
+        'placeholder': 'Confirme a Senha',
+        'class': 'form-control'
+    }))
 
-    class Meta:
+    class Meta(UserCreationForm.Meta): 
         model = Usuario
-        fields = ['nome', 'email', 'senha']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -60,12 +51,25 @@ class CadastroForm(forms.ModelForm):
             raise forms.ValidationError('Este e-mail já está cadastrado!')
         return email
 
-    def clean(self):
-        cleaned_data = super().clean()
-        senha = cleaned_data.get('senha')
-        confirma_senha = cleaned_data.get('confirma_senha')
+class UserInfoForm(forms.ModelForm):
 
-        if senha and confirma_senha and senha != confirma_senha:
-            raise forms.ValidationError('As senhas não são iguais!')
+    username = forms.CharField(label='Nome de Usuário', widget=forms.TextInput(attrs={
+        'placeholder': 'Nome de Usuário',
+        'class': 'form-control'
+    }))
+    email = forms.EmailField(label='E-mail', widget=forms.EmailInput(attrs={
+        'placeholder': 'E-mail',
+        'class': 'form-control'
+    }))
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={
+        'placeholder': 'Senha',
+        'class': 'form-control'
+    }))
 
-        return cleaned_data
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'foto_perfil']
+
+    def __init__(self, *args, **kwargs):
+        super(UserInfoForm, self).__init__(*args, **kwargs)
+        self.fields['foto_perfil'].widget.attrs['accept'] = 'image/*'

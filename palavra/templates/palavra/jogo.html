@@ -66,8 +66,8 @@
     <div class="container__pagina">
         <div class="usuario__container">
             <div class="usuario__imagem">
-                {% if usuario and usuario.foto_perfil %}
-                    <img src="{{ usuario.foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
+                {% if foto_perfil %}
+                    <img src="{{ foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
                 {% else %}
                     <img src="{% static 'img/assets/icon-user.png' %}" alt="Imagem não disponível">
                 {% endif %}
