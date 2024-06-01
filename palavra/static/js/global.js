@@ -1,102 +1,71 @@
-function adicionarClasseAtiva() {
-    var blocosLetras = document.querySelectorAll('.bloco-palavras__fila.active .bloco-palavras__letra');
-    
-    blocosLetras.forEach(function(blocoLetra) {
-        blocoLetra.addEventListener('click', function() {
-            blocosLetras.forEach(function(bloco) {
-                bloco.classList.remove('active');
-            });
-            blocoLetra.classList.add('active');
-        });
-    });
-}
-    
-// function verificaCamposVazios() {
-//     var filas = document.querySelectorAll('.bloco-palavras__fila');
+document.addEventListener('DOMContentLoaded', function() {
 
-//     filas.forEach(function(fila) {
-//         var blocos = document.querySelectorAll('.bloco-palavras__letra');
-        
-//         blocos.forEach(function(bloco) {
-//             if(bloco.textContent == '') {
-//                 console.log(bloco.textContent);
-//             }
-//         })
-//     })
-// }
+    // Define the keys to ignore
+    let ignorar = ["Control", "Space", "AltGraph", "Alt", "Shift", "CapsLock", "Tab", "Alt", "Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-// verificaCamposVazios();
+    // Seleciona a linha ativa
+    var linhas = document.querySelectorAll('.bloco-palavras__fila');
+    var activeLineIndex = 0;
 
-
-function adicionarLetrasNosCampos() {
-    var teclasTeclado = document.querySelectorAll('.teclado__tecla');
-    
-    teclasTeclado.forEach(function(tecla) {
-        tecla.addEventListener('click', function() {
-            inserirLetra(tecla);
-        });
-    });
-
-    document.addEventListener('keydown', function(event) {
-
-        var letra = String.fromCharCode(event.keyCode);
-
-        if (/[a-zA-Z]/.test(letra)) {
-
-            var teclaCorrespondente = document.querySelector('.teclado__tecla.tecla_' + letra.toLowerCase());
-
-            if (teclaCorrespondente) {
-                inserirLetra(teclaCorrespondente);
+    function handleInput(event, elementos, index) {
+        var value = event.currentTarget.value.trim();
+        if (value.length === 1) {
+            if (index < elementos.length - 1) {
+                var proximoElemento = elementos[index + 1];
+                proximoElemento.focus();
             }
         }
-    });
-}
-
-function inserirLetra(tecla) {
-    var letra = tecla.className.split('tecla_')[1].toUpperCase();
-    var blocoAtivo = document.querySelector('.bloco-palavras__letra.active');
-
-    var filas = document.querySelectorAll('.bloco-palavras__fila');
-
-    if (blocoAtivo) {
-        blocoAtivo.textContent = letra;
-        blocoAtivo.classList.remove('active');
-        blocoAtivo.nextElementSibling.classList.add('active');
     }
-}
 
-document.addEventListener('DOMContentLoaded', adicionarClasseAtiva);
-document.addEventListener('DOMContentLoaded', adicionarLetrasNosCampos);
+    function handleKeydown(event, elementos, index) {
+        if (event.key === 'Enter') {
+            // Monta a palavra e mostra no console quando apertar Enter
+            var word = '';
+            elementos.forEach(function(elemento) {
+                word += elemento.value.trim();
+            });
+            console.clear();
+            console.log('Word:', word);
 
-function showContent(contentId, clickedLink) {
-    var contents = document.getElementsByClassName('configuracoes__content');
-    var links = document.querySelectorAll('.configuracoes__sidebar-lateral a');
-    
-    for (var i = 0; i < contents.length; i++) {
-        contents[i].classList.remove('active');
+            // Move to the next line
+            if (activeLineIndex < linhas.length - 1) {
+                activeLineIndex++;
+                var nextElementos = linhas[activeLineIndex].querySelectorAll('.bloco-palavras__letra');
+                nextElementos[0].focus();
+            }
+        } else if (event.key === 'Backspace') {
+            var elementoAnterior = elementos[index - 1];
+            if (elementoAnterior) {
+                elementoAnterior.focus();
+                elementoAnterior.value = '';
+            }
+        } else {
+            if (!((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122) || ignorar.includes(event.key))) {
+                event.preventDefault();
+            }
+        }
     }
-    
-    for (var i = 0; i < links.length; i++) {
-        links[i].classList.remove('active');
+
+    function handleFocus(event) {
+        var input = event.currentTarget;
+        input.setSelectionRange(input.value.length, input.value.length);
     }
-    
-    document.getElementById(contentId).classList.add('active');
-    clickedLink.classList.add('active');
-}
 
+    function setupLineHandlers(linha, index) {
+        var elementos = linha.querySelectorAll('.bloco-palavras__letra');
 
-// MAQUINA DE ESCREVER
+        elementos.forEach(function(elemento, i) {
+            elemento.addEventListener('input', function(event) {
+                handleInput(event, elementos, i);
+            });
 
-function typeWrite(elemento){
-    const textoArray = elemento.innerHTML.split('');
-    elemento.innerHTML = ' ';
-    textoArray.forEach(function(letra, i) {   
-      
-    setTimeout(function(){
-        elemento.innerHTML += letra;
-    }, 40 * i)
+            elemento.addEventListener('keydown', function(event) {
+                handleKeydown(event, elementos, i);
+            });
 
-  });
-}
-const texto = document.querySelector('.pagina__texto');
-typeWrite(texto);
+            elemento.addEventListener('focus', handleFocus);
+        });
+    }
+
+    linhas.forEach(setupLineHandlers);
+});
