@@ -4,13 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .forms import LoginForm, CadastroForm, UserInfoForm
-from .models import Usuario, Tema, Palavra
-from .termo import Termo, InvalidAttempt
-from .utils import get_palavra_aleatoria
 import json
-import logging
 
-logger = logging.getLogger(__name__)
+from .utils import get_palavra_aleatoria
+from .models import Palavra, Tema
+from .termo import Termo, InvalidAttempt
 
 # Página Inicial
 def index(request):
@@ -62,15 +60,22 @@ def jogo(request):
             return JsonResponse({'status': 'error', 'message': 'No word provided'}, status=400)
 
         if palavra_correta:
-            termo = Termo(palavra_correta, {palavra_correta})
+            palavras_validas = Palavra.objects.values_list('descricao', flat=True)
+            termo = Termo(palavra_correta, set(palavras_validas))
             try:
-                result = termo.test(palavra)
-                return JsonResponse({'status': 'success', 'result': result})
+                result = termo.test_guess(palavra)
+                return JsonResponse({'status': 'success', 'result': result.to_dict()})
             except InvalidAttempt as e:
                 return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
-    return render(request, 'palavra/jogo.html', {'temas': temas, 'usuario': usuario})
-
+    return render(request, 'palavra/jogo.html', {
+        'temas': temas, 
+        'usuario': usuario,
+    })
+'''
+    Response from backend: 
+    Object { status: "error", message: "" }
+'''
 
 # Configurações
 @login_required(login_url='/palavra/entrar/')

@@ -37,8 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             elementos.forEach(function(elemento) {
                 palavra += elemento.value.trim();
             });
-            console.clear();
-            console.log(palavra);
 
             enviaPalavra(palavra);
 
@@ -55,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     nextElementos[0].focus();
                 }, 100);
             }
+
         } else if (event.key === 'Backspace') {
             var elementoAtual = elementos[indice];
             var elementoAnterior = elementos[indice - 1];
@@ -112,8 +111,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    //
     desativaLinhasNaoAtivas();
-
+    
     function enviaPalavra(palavra) {
         fetch('/palavra/jogo/', {
             method: 'POST',
