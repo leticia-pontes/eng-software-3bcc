@@ -40,7 +40,7 @@
             width: 10vw;
             border-radius: 10%;
         }
-        {% comment %} .letras-pop__certa {
+        .letras-pop__certa {
             background: #0CCABA;
         }
         .letras-pop__errada {
@@ -48,7 +48,7 @@
         }
         .letras-pop__nao-tem {
             background: #191516;
-        } {% endcomment %}
+        }
     </style>
 </head>
 <body>
@@ -98,7 +98,7 @@
             </div>
     
             <div class="usuario__escolha-tema">
-                Tema:
+                <span class="label__escolha-tema">Tema:</span><br>
                 <select name="select-tema" class="usuario__select-tema">
                     {% for tema in temas %}
                         <option value="{{ tema.descricao|lower }}" class="usuario__select-tema">{{ tema.descricao }}</option>

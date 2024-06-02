@@ -1,22 +1,16 @@
-# Autenticação de Usuário
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .forms import LoginForm, CadastroForm, UserInfoForm
 from django.views.decorators.csrf import csrf_exempt
-
-# Renderização do models nas views
-from .models import Usuario, Tema, Palavra
 from django.http import JsonResponse
-import json
-
-# Lógica do Jogo
+from .forms import LoginForm, CadastroForm, UserInfoForm
+from .models import Usuario, Tema, Palavra
 from .termo import Termo, InvalidAttempt
-import random
-# import logging
+from .utils import get_palavra_aleatoria
+import json
+import logging
 
-# logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 # Página Inicial
 def index(request):
@@ -48,30 +42,32 @@ def cadastrar(request):
         form = CadastroForm()
     return render(request, 'palavra/cadastro.html', {'form': form})
 
-
-# Jogabilidade
-def get_palavra_aleatoria():
-    palavra_aleatoria = Palavra.objects.order_by('?').first()
-    return palavra_aleatoria.word if palavra_aleatoria else None
-
+# Lógica do jogo
 @login_required(login_url='/palavra/entrar/')
 @csrf_exempt
 def jogo(request):
     usuario = request.user
     temas = Tema.objects.all()
-    
+
+    # Seleciona a palavra da jogada
+    if 'palavra_correta' not in request.session:
+        request.session['palavra_correta'] = get_palavra_aleatoria()
+
     if request.method == 'POST':
         dados = json.loads(request.body)
-        palavra = get_palavra_aleatoria()
-        
-        # if palavra:
-        #     termo = Termo(palavra, {palavra})
-        #     try:
-        #         result = termo.test(dados.get('palavra', ''))
-        #     except InvalidAttempt as e:
-        #         logger.error(f"InvalidAttempt exception: {e}")
-        
-        # return JsonResponse({'status': 'success'})
+        palavra = dados.get('palavra', '')
+        palavra_correta = request.session['palavra_correta']
+
+        if not palavra:
+            return JsonResponse({'status': 'error', 'message': 'No word provided'}, status=400)
+
+        if palavra_correta:
+            termo = Termo(palavra_correta, {palavra_correta})
+            try:
+                result = termo.test(palavra)
+                return JsonResponse({'status': 'success', 'result': result})
+            except InvalidAttempt as e:
+                return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
     return render(request, 'palavra/jogo.html', {'temas': temas, 'usuario': usuario})
 

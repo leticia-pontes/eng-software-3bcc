@@ -127,6 +127,10 @@ p .letras-popup__certa {
     margin-top: 30px;
 }
 
+.label__escolha-tema {
+    font-size: 18px;
+}
+
 .usuario__select-tema {
     width: 240px;
     height: 50px;

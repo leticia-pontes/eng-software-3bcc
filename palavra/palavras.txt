@@ -42,3 +42,5 @@ cinto
 furia
 exato
 quero
+jogar
+retro
