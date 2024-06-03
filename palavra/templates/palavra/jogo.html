@@ -35,19 +35,17 @@
         }
         .informacoes-popup span {
             font-size: 30px;
-            color: white;
             height: 10vh;
             width: 10vw;
             border-radius: 10%;
         }
         .letras-pop__certa {
             background: #0CCABA;
+            color: white;
         }
         .letras-pop__errada {
             background: #FFD952;
-        }
-        .letras-pop__nao-tem {
-            background: #191516;
+            color: white;
         }
     </style>
 </head>
@@ -58,7 +56,7 @@
         <div id="container-popup" class="container-popup">
             <div class="header-popup">
                 <span class="titulo-popup">PALAVRA</span>
-                <span class="botao-fechar" id="fechar-popup">&times;</span>
+                <span class="botao-fechar-popup" id="fechar-popup">&times;</span>
             </div>
             &nbsp;
             <div class="informacoes-popup">
@@ -72,6 +70,15 @@
                 <p>As palavras podem possuir letras repetidas.</p>&nbsp;
                 <p>Uma palavra nova aparece a cada dia.</p>&nbsp;
             </div>
+        </div>
+    </div>
+
+    <!-- ALERTA -->
+    <div id="alerta" class="alerta">
+        <div class="alerta-content">
+            <h4 id="tituloAlerta"></h4><br>
+            <p id="mensagemAlerta"></p><br>
+            <button id="botaoConfirmaAlerta">OK</button>
         </div>
     </div>
 
@@ -94,7 +101,7 @@
                 {{ nome }}
             </div>
             <div class="usuario__pontos">
-                Pontos: <span id="qtde-pontos">{{ user.pontuacao_total }}</span> pontos
+                Pontos: <span id="qtde-pontos">{{ user.pontuacao_total }}</span> ponto(s)
             </div>
     
             <div class="usuario__escolha-tema">
@@ -109,21 +116,17 @@
     
         <!-- PALAVRAS -->
         <div class="bloco-palavras__container">
-
             <form id="palavra" method="post">
                 {% csrf_token %}
                 {% for line in "123456" %}
-                    <div class="bloco-palavras__fila active">
-                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
-                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
-                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
-                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
-                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                    <div class="bloco-palavras__fila">
+                        {% for i in "12345" %}
+                            <input type="text" class="bloco-palavras__letra" id="letra{{ forloop.parentloop.counter0 }}{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                        {% endfor %}
                     </div>
                 {% endfor %}
             </form>
         </div>
-    </div>
     
     
     <!-- FOOTER -->
