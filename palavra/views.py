@@ -7,7 +7,7 @@ from .forms import LoginForm, CadastroForm, UserInfoForm
 import json
 
 from .utils import get_palavra_aleatoria
-from .models import Palavra, Tema
+from .models import Palavra, Tema, Usuario
 from .termo import Termo, InvalidAttempt
 
 # Página Inicial
@@ -48,8 +48,9 @@ def jogo(request):
     temas = Tema.objects.all()
 
     # Seleciona a palavra da jogada
-    if 'palavra_correta' not in request.session:
+    if 'palavra_correta' not in request.session or request.session.get('nova_palavra', False):
         request.session['palavra_correta'] = get_palavra_aleatoria()
+        request.session['nova_palavra'] = False
 
     if request.method == 'POST':
         dados = json.loads(request.body)
@@ -64,6 +65,11 @@ def jogo(request):
             termo = Termo(palavra_correta, set(palavras_validas))
             try:
                 result = termo.test_guess(palavra)
+                if result.win:
+                    usuario.pontuacao_total += 10
+                    usuario.save()
+
+                    request.session['nova_palavra'] = True
                 return JsonResponse({'status': 'success', 'result': result.to_dict()})
             except InvalidAttempt as e:
                 return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
@@ -72,10 +78,7 @@ def jogo(request):
         'temas': temas, 
         'usuario': usuario,
     })
-'''
-    Response from backend: 
-    Object { status: "error", message: "" }
-'''
+
 
 # Configurações
 @login_required(login_url='/palavra/entrar/')
