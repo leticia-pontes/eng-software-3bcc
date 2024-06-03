@@ -36,7 +36,7 @@ p .letras-popup__certa {
     margin: 0 auto;
     margin-top: 70px;
     margin-bottom: 40px;
-    width: 100%;
+    /* width: 100%; */
 }   
 
 .bloco-palavras__fila {
@@ -68,10 +68,16 @@ p .letras-popup__certa {
     box-shadow: var(--borda-box-shadow);
     font-size: 26px;
     cursor: default;
+    padding-left: 30px;
+    caret-color: transparent;
 }
 
 .bloco-palavras__letra.active {
     border-bottom: 8px solid var(--cor-bordas-gerais);
+}
+
+.bloco-palavras__letra input {
+    cursor: not-allowed;
 }
 
 .container__pagina {
@@ -105,7 +111,7 @@ p .letras-popup__certa {
     box-shadow: var(--borda-box-shadow);
 }
 
-.foto-perfil {
+.usuario__imagem .foto-perfil {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -119,6 +125,10 @@ p .letras-popup__certa {
 
 .usuario__escolha-tema {
     margin-top: 30px;
+}
+
+.label__escolha-tema {
+    font-size: 18px;
 }
 
 .usuario__select-tema {

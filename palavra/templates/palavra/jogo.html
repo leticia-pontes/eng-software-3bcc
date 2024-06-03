@@ -33,6 +33,22 @@
             padding: 10px;
             background: #fff;
         }
+        .informacoes-popup span {
+            font-size: 30px;
+            color: white;
+            height: 10vh;
+            width: 10vw;
+            border-radius: 10%;
+        }
+        .letras-pop__certa {
+            background: #0CCABA;
+        }
+        .letras-pop__errada {
+            background: #FFD952;
+        }
+        .letras-pop__nao-tem {
+            background: #191516;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +63,7 @@
             &nbsp;
             <div class="informacoes-popup">
                 <p>Como jogar?</p>&nbsp;
+                <p>Descubra as palavras certas. Depois de cada tentativa, as peças mostram o quão perto você está da solução.</p>&nbsp;
                 <p>A letra<span class="letras-pop__certa"> T </span>faz parte da palavra e está na posição correta.</p>&nbsp;
                 <p>A letra<span class="letras-pop__errada"> R </span>faz parte da palavra mas em outra posição.</p>&nbsp;
                 <p>A letra<span class="letras-pop__nao-tem"> M </span>não faz parte da palavra.</p>&nbsp;
@@ -81,6 +98,7 @@
             </div>
     
             <div class="usuario__escolha-tema">
+                <span class="label__escolha-tema">Tema:</span><br>
                 <select name="select-tema" class="usuario__select-tema">
                     {% for tema in temas %}
                         <option value="{{ tema.descricao|lower }}" class="usuario__select-tema">{{ tema.descricao }}</option>
@@ -91,86 +109,20 @@
     
         <!-- PALAVRAS -->
         <div class="bloco-palavras__container">
-            <div class="bloco-palavras__fila fila_1 active">
-                <div class="bloco-palavras__letra">t</div>
-                <div class="bloco-palavras__letra">e</div>
-                <div class="bloco-palavras__letra">s</div>
-                <div class="bloco-palavras__letra">t</div>
-                <div class="bloco-palavras__letra">e</div>
-            </div>
-    
-            <div class="bloco-palavras__fila fila_2">
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-            </div>
-    
-            <div class="bloco-palavras__fila fila_3">
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-            </div>
-    
-            <div class="bloco-palavras__fila fila_4">
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-            </div>
-    
-            <div class="bloco-palavras__fila fila_5">
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-            </div>
-    
-            <div class="bloco-palavras__fila fila_6">
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-                <div class="bloco-palavras__letra"></div>
-            </div>
-        </div>
-    
-        <div class="teclado__container">
-            <div class="teclado__content">
-                <button class="teclado__tecla tecla_q">Q</button>
-                <button class="teclado__tecla tecla_w">W</button>
-                <button class="teclado__tecla tecla_e">E</button>
-                <button class="teclado__tecla tecla_r">R</button>
-                <button class="teclado__tecla tecla_t">T</button>
-                <button class="teclado__tecla tecla_y">Y</button>
-                <button class="teclado__tecla tecla_u">U</button>
-                <button class="teclado__tecla tecla_i">I</button>
-                <button class="teclado__tecla tecla_o">O</button>
-                <button class="teclado__tecla tecla_p">P</button>
-                <button class="teclado__tecla tecla_a">A</button>
-                <button class="teclado__tecla tecla_s">S</button>
-                <button class="teclado__tecla tecla_d">D</button>
-                <button class="teclado__tecla tecla_f">F</button>
-                <button class="teclado__tecla tecla_g">G</button>
-                <button class="teclado__tecla tecla_h">H</button>
-                <button class="teclado__tecla tecla_j">J</button>
-                <button class="teclado__tecla tecla_k">K</button>
-                <button class="teclado__tecla tecla_l">L</button>
-                <button class="teclado__tecla tecla_z">Z</button>
-                <button class="teclado__tecla tecla_x">X</button>
-                <button class="teclado__tecla tecla_c">C</button>
-                <button class="teclado__tecla tecla_v">V</button>
-                <button class="teclado__tecla tecla_b">B</button>
-                <button class="teclado__tecla tecla_n">N</button>
-                <button class="teclado__tecla tecla_m">M</button>
-            </div>
-        </div>
 
+            <form id="palavra" method="post">
+                {% csrf_token %}
+                {% for line in "123456" %}
+                    <div class="bloco-palavras__fila active">
+                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                        <input type="text" class="bloco-palavras__letra" name="letra{{ forloop.counter }}" id="letra{{ forloop.counter }}" maxlength="1" autocomplete="off">
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
     </div>
     
     

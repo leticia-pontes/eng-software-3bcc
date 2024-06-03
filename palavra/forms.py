@@ -53,6 +53,8 @@ class CadastroForm(UserCreationForm):
 
 class UserInfoForm(forms.ModelForm):
 
+    foto_perfil = forms.ImageField(widget=forms.FileInput())
+
     username = forms.CharField(label='Nome de Usuário', widget=forms.TextInput(attrs={
         'placeholder': 'Nome de Usuário',
         'class': 'form-control'
@@ -72,4 +74,7 @@ class UserInfoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserInfoForm, self).__init__(*args, **kwargs)
-        self.fields['foto_perfil'].widget.attrs['accept'] = 'image/*'
+        self.fields['foto_perfil'].widget.attrs.update({
+            'accept': 'image/*',
+            'class': 'form-control-file'
+        })

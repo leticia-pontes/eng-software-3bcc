@@ -16,6 +16,14 @@
 
     <title>Palavra</title>
     <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
+    <style>
+        .foto-perfil {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,33 +79,43 @@
                 <div class="configuracoes__main-content">
                     <div id="content1" class="configuracoes__content active">
                         <div class="configuracoes__perfil">
-                            <div class="configuracoes__imagem-perfil">
-                                {% if foto_perfil %}
-                                    <img src="{{ foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
-                                {% else %}
-                                    <img src="{% static 'img/assets/icon-user.png' %}" alt="Imagem não disponível">
-                                {% endif %}
-                                Selecione uma imagem de perfil
-                            </div>
                             <div class="configuracoes__form-control">
-                                <form method="post">
+                                <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {% comment %} <div class="cadastro">
-                                        <label for="{{ form.username.id_for_label }}">Nome de Usuário:</label>
+            
+                                    <div class="form-group">
+                                        {% if user_info and user_info.foto_perfil %}
+                                            <div class="usuario__imagem">
+                                                <img src="{{ user_info.foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
+                                            </div>
+                                        {% else %}
+                                            <label for="id_foto_perfil">Foto de Perfil</label>
+                                            <div class="circulo-usuario">
+                                                <img src="{% static 'img/assets/icon-user.png' %}" alt="Imagem não disponível">
+                                            </div>
+                                        {% endif %}
+                                        {{ form.foto_perfil }}   
+                                        <button type="button" class="btn btn-danger mt-2" onclick="document.getElementById('id_foto_perfil').value = ''; document.querySelector('.configuracoes__imagem-perfil img').src = '{% static 'img/assets/icon-user.png' %}';">Limpar</button>
+                                    </div>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label for="id_username">Nome de Usuário</label>
                                         {{ form.username }}
                                     </div>
-                                    <div class="cadastro">
-                                        <label for="{{ form.email.id_for_label }}">E-mail:</label>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label for="id_email">E-mail</label>
                                         {{ form.email }}
                                     </div>
-                                    <div class="cadastro">
-                                        <label for="{{ form.password1.id_for_label }}">Senha:</label>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label for="id_password1">Senha</label>
                                         {{ form.password1 }}
-                                    </div> {% endcomment %}
-
-                                    <input type="text" name="username" placeholder="NOME">
+                                    </div>
+                                    <br><br>
+                                    {% comment %} <input type="text" name="username" placeholder="NOME">
                                     <input type="email" name="email" placeholder="EMAIL">
-                                    <input type="password" name="password" placeholder="SENHA">
+                                    <input type="password" name="password" placeholder="SENHA"> {% endcomment %}
                                     <button type="submit">Salvar Alterações</button>
 
                                     {% comment %} <a href="#" class="configuracoes__button">
@@ -132,6 +150,17 @@
         crossorigin="anonymous"></script>
 
     <script src="{% static 'js/global.js' %}"></script>
+    {% comment %} <script>
+        // Optional: Add JavaScript to handle image preview and clear functionality
+        document.getElementById('id_foto_perfil').addEventListener('change', function(event) {
+            const [file] = this.files;
+            if (file) {
+                const img = this.previousElementSibling.querySelector('img');
+                img.src = URL.createObjectURL(file);
+                img.style.display = 'block';
+            }
+        });
+    </script> {% endcomment %}
 </body>
 
 </html>
