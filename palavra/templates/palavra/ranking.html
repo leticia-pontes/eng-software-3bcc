@@ -33,38 +33,37 @@
                     <i class="fa-solid fa-square-poll-vertical"></i>                    
                     <h1>Ranking de Jogadores</h1>
                 </div>
-                    <div class="perfil-usuario">
-                        <div class="imagem-e-nome">
-                            <div class="circulo-usuario">
-                                {% if foto_perfil %}
-                                    <img src="{{ foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
-                                {% else %}
-                                    <img src="{% static 'img/assets/icon-user.png' %}" alt="Usuário">
-                                {% endif %}
-                            </div>
-                            <div class="nome-usuario">
-                                <p>{{ nome }}</p>
-                                <p>Posição do ranking: 1º</p>
-                            </div>
-                        </div>
-                        <div class="pontuacao">
-                            <span>{{ pontuacao }} ponto(s)</span>
-                        </div>
-                    </div>
-                    <div class="ranking">
-                        {% for usuario in top_cinco %}
-                            <div class="usuario">
-                                <div class="trofeu-e-nome">
-                                    <img src="{% static 'img/trofeu.png' %}" alt="imagem de troféu dourado">
-                                    <p>{{ usuario.username }}</p>
-                                </div>
-                                <div class="pontuacao-usuario">
-                                    <span>{{ usuario.pontuacao_total }} ponto(s)</span>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                
+                  <div class="perfil-usuario">
+                      <div class="imagem-e-nome">
+                          <div class="circulo-usuario">
+                              {% if foto_perfil %}
+                                  <img src="{{ foto_perfil.url }}" alt="Foto de Perfil" class="foto-perfil">
+                              {% else %}
+                                  <img src="{% static 'img/assets/icon-user.png' %}" alt="Usuário">
+                              {% endif %}
+                          </div>
+                          <div class="nome-usuario">
+                              <p>{{ nome }}</p>
+                              <p>Posição do ranking: 1º</p>
+                          </div>
+                      </div>
+                      <div class="pontuacao">
+                          <span>{{ pontuacao }} ponto(s)</span>
+                      </div>
+                  </div>
+                  <div class="ranking">
+                      {% for usuario in top_cinco %}
+                          <div class="usuario">
+                              <div class="trofeu-e-nome">
+                                  <img src="{% static 'img/trofeu.png' %}" alt="imagem de troféu dourado">
+                                  <p>{{ usuario.username }}</p>
+                              </div>
+                              <div class="pontuacao-usuario">
+                                  <span>{{ usuario.pontuacao_total }} ponto(s)</span>
+                              </div>
+                          </div>
+                      {% endfor %}
+                  </div>
             </div>
         </div>
     </main>
