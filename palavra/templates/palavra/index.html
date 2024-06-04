@@ -37,11 +37,11 @@
             </div>
 
             <div class="header__botoes">
-                <a href="{% url 'cadastro' %}" class="header__botao-entrar">
+                <a href="{% url 'entrar' %}" class="header__botao-entrar">
                     Entre
                 </a>
                 
-                <a href="{% url 'cadastro' %}" class="header__botao-cadastrar">
+                <a href="{% url 'cadastrar' %}" class="header__botao-cadastrar">
                     Cadastre-se
                 </a>
             </div>
@@ -56,13 +56,13 @@
                 Algum tema em mente?
                 Você tem 6 chances de descobrir uma palavra de 5 letras 👀     
             </div>
-
             <div class="pagina__jogar">
                 <a href="{% url 'jogo' %}" class="pagina__botao-jogar">
                     jogar
                 </a>
             </div>
         </div>
+        
 
         <div class="pagina__container-cubo">
             <div class="pagina__cubo">
@@ -87,13 +87,7 @@
     </div>
 
     <!-- FOOTER -->
-    <div class="footer">
-        <div class="footer__content">
-            <div class="footer__text">
-                Palavra - projeto de engenharia de software - inspirado no jogo <span>wordle</span>
-            </div>
-        </div>
-    </div>
+    {% include "footer.html" %}
 
     <script src="{% static 'js/global.js' %}"></script>
 </body>

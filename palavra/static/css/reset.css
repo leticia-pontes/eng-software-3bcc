@@ -3,6 +3,11 @@
 @import url('header.css');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 
+i {
+    font-size: 25px;
+    color: #000;
+}
+
 * {
     margin: 0;
     padding: 0;

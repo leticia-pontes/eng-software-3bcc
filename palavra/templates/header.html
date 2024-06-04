@@ -1,0 +1,63 @@
+<nav class="header">
+    <div class="navbar navbar-expand-lg header__content" aria-label="Offcanvas navbar large">
+        <div class="container-fluid">
+            <div class="header__left m-hidden">
+                <div class="menu">
+                    <a href="#" class="navbar-brand">
+                        <i class="fa-solid fa-bars"></i>  
+                    </a>
+                </div>
+                <div class="suporte">
+                    <a href="#">
+                        <i class="fa-solid fa-circle-question"></i> 
+                    </a>
+                </div>
+            </div>
+            <div class="header__logo">
+                <a href="{% url 'index' %}" class="navbar-brand">
+                    <span>Palavra</span>
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 header__right">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link navbar-item" aria-current="page">
+                                <i class="fa-solid fa-square-parking"></i>
+                                <p class="pontuacao__text text__navbar">{{ pontuacao }} ponto(s)</p>  
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navbar-item" href="{% url 'ranking' %}">
+                                <i class="fa-solid fa-square-poll-vertical"></i>
+                                <p class="pontuacao__text text__navbar d-hidden">Ranking</p>  
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navbar-item" href="#">
+                                <i class="fa-solid fa-circle-user"></i>
+                                <p class="usuario__text text__navbar m-hidden">Bem vindo(a)! {{ nome }}</p>
+                                <p class="usuario__text text__navbar d-hidden">Minha conta</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navbar-item" href="{% url 'configuracoes' %}">
+                                <i class="fa-solid fa-gear"></i>
+                                <p class="pontuacao__text text__navbar d-hidden">Configurações</p>  
+                            </a>
+                        </li>
+                        <li class="nav-item d-hidden">
+                            <a class="nav-link navbar-item" href="#">
+                                <i class="fa-solid fa-circle-question"></i>
+                                <p class="usuario__text text__navbar d-hidden">Ajuda</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

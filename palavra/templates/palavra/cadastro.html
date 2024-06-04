@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
-    <title>Login e Cadastro</title>
+    <title>Cadastro</title>
 </head>
 <body>
     <nav class="header">
@@ -27,42 +27,36 @@
     <main>
         <div class="container_main">
             <div class="content">
-                <div class="login">
-                    <h1>entre</h1>
-                    <p>Que bom vê-lo(a) novamente!
-                        entre e bora adivinhar uma
-                        palavrinha</p>
-                    {% block content %}
-                    <form action="{% url 'jogo' %}" method="post">
-                        {% csrf_token %}
-                        {{ formulario }}
-                        <input type="email" name="email" id="email" placeholder="E-mail"><br>
-                        {% comment %} {{formulario.as_p}} {% endcomment %}
-                        <input type="password" name="senha" id="senha" placeholder="senha"><br>
-                        <button type="submit">Entre</button>
-                    </form>
-                    {% endblock content %}
-                </div>
                 <div class="cadastro">
-                    <h1>cadastra-se</h1>
-                    <p class="subtitulo">Não tem uma conta ainda? cadastra-se!</p>
-                    <form action="" method="post">
-                        <input type="text" name="nome" id="nome" placeholder="Nome"><br>
-                        <input type="email" name="email" id="email" placeholder="E-mail"><br>
-                        <input type="password" name="senha" id="senha" placeholder="senha"><br>
-                        <button type="submit">cadastra-se</button>
+                    <h1>Cadastre-se</h1>
+                    <p class="subtitulo">Não tem uma conta ainda? Cadastre-se!</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="cadastro">
+                            <label for="{{ form.username.id_for_label }}">Nome de Usuário:</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="cadastro">
+                            <label for="{{ form.email.id_for_label }}">E-mail:</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="cadastro">
+                            <label for="{{ form.password1.id_for_label }}">Senha:</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="cadastro">
+                            <label for="{{ form.password2.id_for_label }}">Confirme a Senha:</label>
+                            {{ form.password2 }}
+                        </div>
+                        <button type="submit">Cadastrar</button>
                     </form>
                 </div>
             </div>
         </div>
-    </main>
-    <div class="footer">
-        <div class="footer__content">
-            <div class="footer__text">
-                <p>Palavra - projeto de engenharia de software - inspirado no jogo <a href="https://www.nytimes.com/games/wordle/index.html"  target="_blank">wordle</a></p>
-            </div>
-        </div>
-    </div>
+    </main>    
+
+    <!-- FOOTER -->
+    {% include "footer.html" %}
 
 </body>
 </html>

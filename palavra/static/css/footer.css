@@ -20,7 +20,8 @@
     font-weight: 400;
 }
 
-.footer__text p>a{
+.footer__text a{
+    display: inline;
     color: var(--cor-primaria);
 }
 
