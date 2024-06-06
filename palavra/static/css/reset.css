@@ -41,6 +41,10 @@ blockquote, q {
     quotes: none;
 }
 
+form input {
+    font-family: fantasy !important;
+}
+
 blockquote:before, blockquote:after, q:before, q:after {
     content: '';
     content: none;
