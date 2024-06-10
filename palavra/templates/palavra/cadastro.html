@@ -4,16 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-    src="https://kit.fontawesome.com/026675cdf7.js"
-    crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
     <title>Cadastro</title>
+    <style>
+        .cadastro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cadastro-inputs {
+            margin-bottom: 10px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50vh;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 160px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 15px;
+            overflow-y: auto;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .popup .message {
+            text-align: center;
+            margin: 0 auto 0;
+            font-size: 16px;
+            white-space: pre-line;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active, .popup.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <nav class="header">
@@ -30,7 +83,7 @@
                 <div class="cadastro">
                     <h1>Cadastre-se</h1>
                     <p class="subtitulo">Não tem uma conta ainda? Cadastre-se!</p>
-                    <form method="post">
+                    <form method="post" class="cadastro-form">
                         {% csrf_token %}
                         <div class="cadastro-inputs">
                             {{ form.username }}
@@ -54,6 +107,45 @@
     <!-- FOOTER -->
     {% include "footer.html" %}
 
+    <!-- POPUP -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close" id="close-popup">&times;</span>
+        <p class="message" id="popup-message"></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function mostrarPopup(mensagem) {
+                var overlay = document.getElementById('overlay');
+                var popup = document.getElementById('popup');
+                var message = document.getElementById('popup-message');
+                var close = document.getElementById('close-popup');
+
+                message.innerText = mensagem;
+                overlay.classList.add('active');
+                popup.classList.add('active');
+
+                close.addEventListener('click', function() {
+                    overlay.classList.remove('active');
+                    popup.classList.remove('active');
+                });
+
+                overlay.addEventListener('click', function() {
+                    overlay.classList.remove('active');
+                    popup.classList.remove('active');
+                });
+            }
+
+            {% if error %}
+                var errorMessages = JSON.parse('{{ error|escapejs }}');
+                var messages = Object.values(errorMessages).flat().map(function(error) {
+                    return error.message;
+                }).join('\n');
+                mostrarPopup(messages.replace(/\n/g, '\n\n'));
+            {% endif %}
+        });
+    </script>
+
 </body>
 </html>
-        

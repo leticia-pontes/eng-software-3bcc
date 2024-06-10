@@ -4,16 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-    src="https://kit.fontawesome.com/026675cdf7.js"
-    crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
-    <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
     <title>Login</title>
+    <style>
+        .login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 10px;
+        }
+
+        .popup .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .popup .message {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active, .popup.active {
+            display: block;
+        }
+
+        .login-form input {
+            font-family: 'Bungee', sans-serif !important;
+            color: black !important;
+        }
+    </style>
 </head>
 <body>
     <nav class="header">
@@ -29,31 +84,55 @@
             <div class="content">
                 <div class="login">
                     <h1>entre</h1>
-                    <p>Que bom vê-lo(a) novamente!
-                        entre e bora adivinhar uma
-                        palavrinha</p>
-                    <form method="post">
+                    <p>Que bom vê-lo(a) novamente! entre e bora adivinhar uma palavrinha</p>
+                    <br><br>
+                    <form method="post" class="login-form">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        {% comment %} <input type="email" name="email" id="email" placeholder="e-mail" required><br>
-                        <input type="password" name="senha" id="senha" placeholder="senha", required><br> {% endcomment %}
                         <button type="submit">Entrar</button>
                     </form>
-                    {% if error %}
-                        <p class="login-error" id="login-error">{{ error }}</p>
-                    {% endif %}
                 </div>
             </div>
         </div>
     </main>
-    <div class="footer">
-        <div class="footer__content">
-            <div class="footer__text">
-                <p>Palavra - projeto de engenharia de software - inspirado no jogo <a href="https://www.nytimes.com/games/wordle/index.html">wordle</a></p>
-            </div>
-        </div>
+
+    <!-- FOOTER -->
+    {% include "footer.html" %}
+
+    <!-- POPUP -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close" id="close-popup">&times;</span>
+        <p class="message" id="popup-message"></p>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function mostrarPopup(mensagem) {
+                var overlay = document.getElementById('overlay');
+                var popup = document.getElementById('popup');
+                var message = document.getElementById('popup-message');
+                var close = document.getElementById('close-popup');
+
+                message.innerText = mensagem;
+                overlay.classList.add('active');
+                popup.classList.add('active');
+
+                close.addEventListener('click', function() {
+                    overlay.classList.remove('active');
+                    popup.classList.remove('active');
+                });
+
+                overlay.addEventListener('click', function() {
+                    overlay.classList.remove('active');
+                    popup.classList.remove('active');
+                });
+            }
+
+            {% if error %}
+                mostrarPopup("{{ error }}");
+            {% endif %}
+        });
+    </script>
 </body>
 </html>
-        

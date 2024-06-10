@@ -3,9 +3,10 @@
         <div class="container-fluid">
             <div class="header__left m-hidden">
                 <div class="menu">
-                    <a href="#" class="navbar-brand">
+                    <a href="{% url 'logout' %}">Sair</a>
+                    {% comment %} <a href="#" class="navbar-brand">
                         <i class="fa-solid fa-bars"></i>  
-                    </a>
+                    </a> {% endcomment %}
                 </div>
                 <div class="suporte">
                     <a href="#">
@@ -27,11 +28,11 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link navbar-item" aria-current="page">
                                 <i class="fa-solid fa-square-parking"></i>
-                                <p class="pontuacao__text text__navbar">{{ pontuacao }} ponto(s)</p>  
+                                <p class="pontuacao__text text__navbar">{{ pontuacao }} ponto(s)</p> 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link navbar-item" href="{% url 'ranking' %}">
+                            <a class="nav-link navbar-item" href="{% url 'mostrar_ranking_melhores' %}">
                                 <i class="fa-solid fa-square-poll-vertical"></i>
                                 <p class="pontuacao__text text__navbar d-hidden">Ranking</p>  
                             </a>

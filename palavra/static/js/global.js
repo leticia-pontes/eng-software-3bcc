@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     let ignorar = ["Control", "Space", "AltGraph", "Alt", "Shift", "CapsLock", "Tab", "Alt", "Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
     let linhas = document.querySelectorAll('.bloco-palavras__fila');
@@ -90,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function enviaPalavra(palavra) {
+        console.log('Enviando palavra:', palavra);
 
         fetch('/palavra/jogo/', {
             method: 'POST',
@@ -100,9 +100,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-
+            console.log('Resposta recebida:', data);
             let result = data['result'];
-            console.log('Pa pum pirulito pão doce:', result);
             
             if (result['win']) {
                 atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva - 1], true);
@@ -110,23 +109,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     mostrarAlerta("Você ganhou!", "Parabéns por acertar a palavra!");
                     limparInputs();
+                    atualizarPontuacao();
 
                 }, 600);
                 indiceLinhaAtiva = 0;
             } else {
                 atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva - 1]);
                 if (indiceLinhaAtiva === linhas.length - 1) {
-                    desativaLinhasNaoAtivas();
-                    setTimeout(() => {
-                        mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
-                        limparInputs();
-                        indiceLinhaAtiva = 0;
-                    }, 600);
+                    let preenchido = Array.from(linhas[indiceLinhaAtiva].querySelectorAll('.bloco-palavras__letra')).every(elemento => elemento.value.trim() !== '');
+                    if (preenchido) {
+                        atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva]);
+                        desativaLinhasNaoAtivas();
+                        setTimeout(() => {
+                            mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
+                            limparInputs();
+                            indiceLinhaAtiva = 0;
+                        }, 400);
+                    }
                 }
             }
         })
         .catch(error => {
-            console.error('Error sending word to backend:', error);
+            console.error('Erro ao enviar palavra para o backend:', error);
         });
     }
 
@@ -161,5 +165,22 @@ document.addEventListener('DOMContentLoaded', function() {
             limparInputs();
         }
     });
-    
+
+    function atualizarPontuacao() {
+        console.log('Atualizando pontuação...');
+        fetch('/palavra/get_pontuacao/')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Nova pontuação recebida:', data);
+
+                const pontuacaoElementHeader = document.querySelector('.pontuacao__text.text__navbar');
+                pontuacaoElementHeader.textContent = `${data.pontuacao} ponto(s)`;
+
+                const pontuacaoElementBody = document.querySelector('#qtde-pontos');
+                pontuacaoElementBody.textContent = `${data.pontuacao}`;
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar a pontuação:', error);
+            });
+    }
 });

@@ -88,10 +88,8 @@ main{
 .cadastro p {
     font-size: 24px;
     line-height: 1.2;
-    color: var(--borda-campo-letra);
     opacity: 0.5;
     width: 442px;
-
 }
 
 .login form{
@@ -105,16 +103,18 @@ form input{
     height: 50px;
     background-color: #FFFFFF;
     padding: 10px 20px;
-
+    color: black;
 }
-
 
 form input::placeholder {
     font-size: 24px;
-    color: var(--borda-campo-letra);
     opacity: 0.22;
-
 }
+
+.login-input {
+    color: black;
+}
+
 input, .container_main button{
     margin-bottom: 22px;
     border-radius: 5px;
