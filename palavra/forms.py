@@ -7,12 +7,12 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(label='Nome de Usuário', widget=forms.TextInput(attrs={
         'placeholder': 'Nome de Usuário',
         'required': 'required',
-        'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
+        'class': 'form-control'
     }))
     password = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={
         'placeholder': 'Senha',
         'required': 'required',
-        'style': 'font-size: 24px; color: var(--borda-campo-letra); opacity: 0.22; color: black'
+        'class': 'form-control'
     }))
 
     error_messages = {

@@ -1,6 +1,9 @@
 :root {
+    --cor-fonte: #000;
     --cor-primaria: #0CCABA;
-    --cor-bordas-gerais: #a3a3a3;
+    --cor-footer: #000;
+    --cor-fonte-footer: #fff;
+    --cor-bordas-gerais: #888888;
 
     /* Cores teclado */
     --borda-campo-letra: #999999;

@@ -1,59 +1,43 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-    src="https://kit.fontawesome.com/026675cdf7.js"
-    crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
-    <link rel="stylesheet" href="{% static 'css/responsivo_cadastro.css' %}">
-    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
-    <title>Login</title>
-</head>
-<body>
-    <nav class="header">
-        <a href="{% url 'index' %}" class="navbar-brand">
-            Palavra
-        </a>
-        <div class="header__button">
-            <button type="submit">Jogar</button>
-        </div>
-    </nav>
-    <main>
-        <div class="container_main">
-            <div class="content">
-                <div class="login">
-                    <h1>entre</h1>
-                    <p>Que bom vê-lo(a) novamente!
-                        entre e bora adivinhar uma
-                        palavrinha</p>
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        {% comment %} <input type="email" name="email" id="email" placeholder="e-mail" required><br>
-                        <input type="password" name="senha" id="senha" placeholder="senha", required><br> {% endcomment %}
-                        <button type="submit">Entrar</button>
-                    </form>
-                    {% if error %}
-                        <p class="login-error" id="login-error">{{ error }}</p>
-                    {% endif %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login-cadastro.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}">
+        <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}">
+        <title>Login</title>
+    </head>
+    <body>
+        <nav class="header">
+            <a href="{% url 'index' %}" class="navbar-brand">Palavra</a>
+            <div class="header__button">
+                <button type="submit">Jogar</button>
+            </div>
+        </nav>
+
+        <main>
+            <div class="container_main">
+                <div class="content">
+                    <div class="login">
+                        <h1>entre</h1>
+                        <p>Que bom vê-lo(a) novamente! entre e bora adivinhar uma palavrinha</p><br>
+                        <form method="post" class="form-control">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {% comment %} <button type="submit">Entrar</button> {% endcomment %}
+                        </form>
+                        {% if error %}
+                            <p class="login-error" id="login-error">{{ error }}</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <div class="footer">
-        <div class="footer__content">
-            <div class="footer__text">
-                <p>Palavra - projeto de engenharia de software - inspirado no jogo <a href="https://www.nytimes.com/games/wordle/index.html">wordle</a></p>
-            </div>
-        </div>
-    </div>
+        </main>
 
-</body>
+        {% include "footer.html" %}
+    </body>
 </html>
-        

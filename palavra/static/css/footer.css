@@ -1,38 +1,19 @@
-/* CSS do footer [Replicado em todas as páginas] */
+@import url('colors.css');
 
+/* Estilos do rodapé */
 .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    background-color: #000;
+    height: 60px;
+    background-color: var(--cor-footer);
+    color: var(--cor-fonte-footer);
+    box-shadow: 0 -1px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-.footer__content {
-    max-width: 1390px;
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    padding: 18px;
-}
-
-.footer__text {
+footer p {
     color: #fff;
-    font-size: 18px;
-    line-height: normal;
-    font-weight: 400;
-}
-
-.footer__text a{
-    display: inline;
-    color: var(--cor-primaria);
-}
-
-.tela-entrada .footer {
-    position: fixed;
-    bottom: 0;
-}
-
-@media (max-width: 992px) {
-    .footer__text {
-        font-size: 16px;
-        line-height: 22px;
-    }
+    font-size: 16px;
 }
