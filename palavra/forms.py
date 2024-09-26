@@ -1,4 +1,3 @@
-# forms.py
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django import forms
 from .models import Usuario
@@ -52,7 +51,6 @@ class CadastroForm(UserCreationForm):
         return email
 
 class UserInfoForm(forms.ModelForm):
-
     foto_perfil = forms.ImageField(widget=forms.FileInput())
 
     username = forms.CharField(label='Nome de Usuário', widget=forms.TextInput(attrs={

@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/026675cdf7.js"
-            crossorigin="anonymous">
-    </script>
+    <script src="https://kit.fontawesome.com/026675cdf7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/login-cadastro.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsivo_login-cadastro.css' %}">
@@ -16,9 +14,7 @@
 </head>
 <body>
     <nav class="header">
-        <a href="{% url 'index' %}" class="navbar-brand">
-            Palavra
-        </a>
+        <a href="{% url 'index' %}" class="navbar-brand">Palavra</a>
     </nav>
     <main>
         <div class="container_main">
@@ -30,17 +26,29 @@
                         {% csrf_token %}
                         <div class="cadastro-inputs">
                             {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="error">{{ form.username.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="cadastro-inputs">
                             {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="error">{{ form.email.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="cadastro-inputs">
                             {{ form.password1 }}
+                            {% if form.password1.errors %}
+                                <div class="error">{{ form.password1.errors }}</div>
+                            {% endif %}
                         </div>
                         <div class="cadastro-inputs">
                             {{ form.password2 }}
+                            {% if form.password2.errors %}
+                                <div class="error">{{ form.password2.errors }}</div>
+                            {% endif %}
                         </div>
-                        <button type="submit">Cadastrar</button>
+                        <button type="submit" class="pagina__botao">Cadastrar</button>
                     </form>
                 </div>
             </div>
@@ -49,7 +57,5 @@
 
     <!-- FOOTER -->
     {% include "footer.html" %}
-
 </body>
 </html>
-        

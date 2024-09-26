@@ -25,7 +25,7 @@
                         <form method="post" class="form-control">
                             {% csrf_token %}
                             {{ form.as_p }}
-                            {% comment %} <button type="submit">Entrar</button> {% endcomment %}
+                            <button type="submit" class="pagina__botao">Entrar</button>
                         </form>
                         {% if error %}
                             <p class="login-error" id="login-error">{{ error }}</p>

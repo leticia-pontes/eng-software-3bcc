@@ -58,7 +58,6 @@ main {
     background-color: #fff;
     width: 100%;
     text-align: center;
-    padding: 0;
 }
 
 .login h1,
@@ -89,12 +88,12 @@ main {
     border: 2px solid var(--borda-campo);
 }
 
-/* Botão de login */
+/* Botão de cadastrar */
 .pagina__botao {
-    background-color: var(--cor-primaria);
+    background-color: var(--cor-fonte);
     color: #fff;
     padding: 15px;
-    width: 100%;
+    width: 200px;
     border-radius: 12px;
     font-size: 18px;
     font-weight: bold;
@@ -103,14 +102,14 @@ main {
 }
 
 .pagina__botao:hover {
-    background-color: var(--cor-primaria-hover);
+    background-color: var(--cor-primaria);
 }
 
 /* Inputs */
 input[type="text"], input[type="password"], input[type="email"] {
     font-family: 'Bungee', cursive !important;
     font-size: 18px;
-    width: 500px;
+    width: 450px;
     padding: 10px;
     margin: 10px 0;
     border-radius: 12px;
@@ -129,10 +128,12 @@ input::placeholder {
 }
 
 /* Mensagem de erro */
-.login-error {
+.error {
     color: var(--erro);
     font-size: 16px;
     margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
 }
 
 /* Links */
