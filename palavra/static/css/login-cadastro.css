@@ -53,26 +53,29 @@ main {
     justify-content: center;
 }
 
-.login {
+.login,
+.cadastro {
     background-color: #fff;
     width: 100%;
     text-align: center;
     padding: 0;
 }
 
-.login h1 {
+.login h1,
+.cadastro h1 {
     color: #000;
     font-size: 34px;
     margin-bottom: 3vh;
 }
 
-.login p {
+.login p,
+.cadastro p {
     font-size: 24px;
     width: 500px;
     margin-bottom: 10vh;
     line-height: 1.2;
     color: var(--cor-fonte);
-    margin: 5px 0;
+    margin: 0 auto;
 }
 
 /* Estilo do formulário */
