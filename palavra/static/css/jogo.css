@@ -69,7 +69,7 @@ body {
 }
 
 .bloco-palavras__fila input {
-    color: var(--cor-fonte) !important;
+    color: var(--cor-fonte);
     font-family: "Bungee", sans-serif !important;
 }
 

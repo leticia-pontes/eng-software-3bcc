@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleInput(event, elementos, indice) {
         let entrada = event.currentTarget.value.trim();
+
         if (entrada.length === 1 && indice < elementos.length - 1) {
             elementos[indice + 1].focus();
         }
@@ -23,21 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
             let palavra = Array.from(elementos).map(elemento => elemento.value.trim()).join('');
             enviaPalavra(palavra);
 
-            if (indiceLinhaAtiva < linhas.length - 1) {
+            if (indiceLinhaAtiva <= linhas.length - 1) {
                 indiceLinhaAtiva++;
                 desativaLinhasNaoAtivas();
-                setTimeout(() => linhas[indiceLinhaAtiva].querySelector('.bloco-palavras__letra').focus(), 100);
+                
+                if (indiceLinhaAtiva < linhas.length)
+                    setTimeout(() => linhas[indiceLinhaAtiva].querySelector('.bloco-palavras__letra').focus(), 100);
             }
+
         } else if (event.key === 'Backspace') {
             let elementoAtual = elementos[indice];
             let elementoAnterior = elementos[indice - 1];
+
             if (elementoAtual.value === '' && elementoAnterior) {
                 elementoAnterior.focus();
                 elementoAnterior.value = '';
             } else if (elementoAtual.value !== '') {
                 elementoAtual.value = '';
             }
-        } else if (!((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122) || ignorar.includes(event.key))) {
+
+        } else if (!((event.keyCode >= 65 && event.keyCode <= 90) || 
+                    (event.keyCode >= 97 && event.keyCode <= 122) || 
+                    ignorar.includes(event.key)) || 
+                ["`", "~", "´", "^", "¨", ".", ",", ";", "'", "\"", "[", "]"].includes(event.key)) {
             event.preventDefault();
         }
     }
@@ -49,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupLineHandlers(linha) {
         let elementos = linha.querySelectorAll('.bloco-palavras__letra');
+
         elementos.forEach((elemento, i) => {
             elemento.addEventListener('input', event => handleInput(event, elementos, i));
             elemento.addEventListener('keydown', event => handleKeydown(event, elementos, i));
@@ -60,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function desativaLinhasNaoAtivas() {
         linhas.forEach((linha, indice) => {
+
             linha.querySelectorAll('.bloco-palavras__letra').forEach(input => {
                 input.disabled = (indice !== indiceLinhaAtiva);
             });
@@ -70,20 +81,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function atualizaFeedback(feedback, linhaAtiva, ganhou = false) {
         let elementos = linhaAtiva.querySelectorAll('.bloco-palavras__letra');
+
         feedback.forEach((letra, indice) => {
+        
             let elementoLetra = elementos[indice];
+        
             if (elementoLetra) {
                 elementoLetra.value = letra[0];
-                elementoLetra.classList.remove('letras-pop__certa', 'letras-pop__errada', 'letras-pop__nao-tem');
+                elementoLetra.classList.remove('letras-palavra__certa', 'letras-palavra__errada', 'letras-palavra__nao-tem');
 
                 if (letra[1] === 'CORRECT_POSITION') {
-                    elementoLetra.classList.add('letras-pop__certa');
+                    elementoLetra.classList.add('letras-palavra__certa');
                 } else if (letra[1] === 'WRONG_POSITION') {
-                    elementoLetra.classList.add('letras-pop__errada');
+                    elementoLetra.classList.add('letras-palavra__errada');
                 }
 
                 if (ganhou && letra[1] === 'CORRECT_POSITION') {
-                    elementoLetra.classList.add('letras-pop__certa');
+                    elementoLetra.classList.add('letras-palavra__certa');
                 }
             }
         });
@@ -102,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
 
             let result = data['result'];
-            console.log('Pa pum pirulito pão doce:', result);
+            // console.log('Pa pum pirulito pão doce:', result);
             
             if (result['win']) {
                 atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva - 1], true);
@@ -112,11 +126,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     limparInputs();
 
                 }, 600);
+
                 indiceLinhaAtiva = 0;
             } else {
                 atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva - 1]);
-                if (indiceLinhaAtiva === linhas.length - 1) {
+
+                if (indiceLinhaAtiva === linhas.length) {
                     desativaLinhasNaoAtivas();
+                
                     setTimeout(() => {
                         mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
                         limparInputs();
@@ -134,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         linhas.forEach(linha => {
             linha.querySelectorAll('.bloco-palavras__letra').forEach(input => {
                 input.value = '';
-                input.classList.remove('letras-pop__certa', 'letras-pop__errada', 'letras-pop__nao-tem');
+                input.classList.remove('letras-palavra__certa', 'letras-palavra__errada', 'letras-palavra__nao-tem');
                 input.removeAttribute('disabled');
             });
         });

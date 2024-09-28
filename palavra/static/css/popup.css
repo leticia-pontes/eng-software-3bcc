@@ -26,12 +26,12 @@
     border-radius: 10%;
 }
 
-.letras-pop__certa {
+.letras-palavra__certa {
     background: #0CCABA;
-    color: white;
+    color: white !important;
 }
 
-.letras-pop__errada {
-    background: #FFD952;
-    color: white;
+.letras-palavra__errada {
+    background: #f6ce3f;
+    color: #fff !important;
 }
