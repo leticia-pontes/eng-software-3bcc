@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function enviaPalavra(palavra) {
 
-        fetch('/palavra/jogo/', {
+        fetch('/jogo/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

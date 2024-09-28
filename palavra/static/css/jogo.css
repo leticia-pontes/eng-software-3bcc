@@ -74,18 +74,18 @@ body {
 }
 
 .bloco-palavras__letra {
-    max-width: 60px;
+    max-width: 70px;
     width: 100%;
-    height: 60px;
+    height: 70px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--borda-campo-letra);
     box-shadow: var(--borda-box-shadow);
-    font-size: 22px;
+    font-size: 26px;
     cursor: default;
-    padding-left: 30px;
+    padding-left: 25px;
     caret-color: transparent;
 }
 
