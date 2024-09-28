@@ -103,8 +103,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function enviaPalavra(palavra) {
+    function animarBorda(elemento) {
+        elemento.classList.add('borda-animada');
+        
+        setTimeout(() => {
+            elemento.classList.remove('borda-animada');
+            apagarPalavra();
+        }, 750);
+    }
+    
+    function apagarPalavra() {
+        let linhaAtiva = linhas[indiceLinhaAtiva - 1];
+        let elementos = linhaAtiva.querySelectorAll('.bloco-palavras__letra');
+        
+        elementos.forEach(elemento => {
+            elemento.value = '';
+            elemento.classList.remove('letras-palavra__certa', 'letras-palavra__errada', 'letras-palavra__nao-tem');
+        });
+    
+        elementos[0].focus();
+    }
 
+    function enviaPalavra(palavra) {
         fetch('/jogo/', {
             method: 'POST',
             headers: {
@@ -143,6 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => {
+            let elementos = linhas[indiceLinhaAtiva - 1].querySelectorAll('.bloco-palavras__letra');
+            elementos.forEach(elemento => animarBorda(elemento));
             console.error('Error sending word to backend:', error);
         });
     }

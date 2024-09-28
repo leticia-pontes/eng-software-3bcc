@@ -83,6 +83,35 @@ body {
     outline: none;
 }
 
+.letras-palavra__certa {
+    font-size: 24pt !important;
+    background: #0CCABA;
+    color: white !important;
+}
+
+.letras-palavra__errada {
+    background: #f6ce3f;
+    color: white !important;
+}
+
+@keyframes mudarBorda {
+    0% {
+        border-color: var(--borda-campo-letra);
+    }
+    50% {
+        border-color: red;
+    }
+    100% {
+        border-color: var(--borda-campo-letra);
+    }
+}
+
+.borda-animada {
+    border-width: 2px;
+    border-style: solid;
+    animation: mudarBorda 0.7s ease-in-out;
+}
+
 .usuario__container {
     display: flex;
     align-items: center;
