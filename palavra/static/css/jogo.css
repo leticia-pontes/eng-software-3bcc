@@ -5,26 +5,6 @@ body {
     overflow: hidden;
 }
 
-.titulo-popup {
-    color: var(--cor-primaria);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 19.5%;
-    font-size: 34px;
-}
-
-.botao-fechar-popup {
-    position: absolute;
-    right: 10%;
-    top: 19%;
-    font-size: 25px;
-}
-
-.informacoes-popup {
-    margin-top: 10%;
-}
-
 .alerta {
     display: none;
     position: fixed;

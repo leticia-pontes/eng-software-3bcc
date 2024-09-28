@@ -12,11 +12,32 @@
 .container-popup {
     display: block;
     z-index: 10;
-    height: 500px;
-    width: 650px;
+    height: 520px;
+    width: 665px;
     border-radius: 10px;
     padding: 10px;
     background: #fff;
+}
+
+.titulo-popup {
+    color: var(--cor-primaria);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 18%;
+    font-size: 34px;
+}
+
+.botao-fechar-popup {
+    position: absolute;
+    right: 29.4%;
+    top: 17%;
+    font-size: 25px;
+}
+
+.informacoes-popup {
+    margin-top: 10%;
+    margin-left: 1.5vh;
 }
 
 .informacoes-popup span {
@@ -26,12 +47,39 @@
     border-radius: 10%;
 }
 
-.letras-palavra__certa {
+.informacoes-popup p {
+    line-height: normal;
+}
+
+.quadrado {
+    display: inline;
+    width: 30px;
+    height: 30px;
+    line-height: normal;
+    text-align: center; 
+    color: white;   
+    font-weight: bold; 
+    border-radius: 3px; 
+    padding: 4px;
+    border: 1px solid var(--borda-campo-letra);
+}
+
+.quadrado span {
+    padding: 50px;
+}
+
+.letra-certa {
+    font-size: 24pt !important;
     background: #0CCABA;
     color: white !important;
 }
 
-.letras-palavra__errada {
+.letra-errada {
     background: #f6ce3f;
-    color: #fff !important;
+    color: white !important;
+}
+
+.letra-nao-tem {
+    font-size: 21pt !important; 
+    color: #000;
 }
