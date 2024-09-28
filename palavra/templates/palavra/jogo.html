@@ -10,78 +10,10 @@
     
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/jogo.css' %}">
-    <link rel="icon" href="{% static 'img/logo/Logo - Wordle Vetor.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+    <link rel="icon" href="{% static 'img/assets/Logo - Wordle Vetor.png' %}" />
 
     <title>Palavra</title>
-    <style>
-        .container-layout {
-            width: 100vw;
-            height: 100vh;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            position: absolute;
-        }
-        .container-popup {
-            display: block;
-            z-index: 10;
-            height: 500px;
-            width: 650px;
-            border-radius: 10px;
-            padding: 10px;
-            background: #fff;
-        }
-        .informacoes-popup span {
-            font-size: 30px;
-            height: 10vh;
-            width: 10vw;
-            border-radius: 10%;
-        }
-        .letras-pop__certa {
-            background: #0CCABA;
-            color: white;
-        }
-        .letras-pop__errada {
-            background: #FFD952;
-            color: white;
-        }
-        .bloco-palavras__container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centraliza os quadradinhos na página */
-            justify-content: center; /* Centraliza na vertical */
-            height: 100vh; /* Preenche a altura da página */
-        }
-        .bloco-palavras__fila {
-            display: flex;
-            justify-content: center; /* Centraliza as letras dentro de cada fila */
-            margin-bottom: 20px;
-            opacity: 0.6;
-        }
-        .bloco-palavras__letra {
-            max-width: 80px;
-            width: 100%;
-            height: 80px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--borda-campo-letra);
-            box-shadow: var(--borda-box-shadow);
-            font-size: 26px;
-            cursor: default;
-            padding-left: 30px;
-            caret-color: transparent;
-        }
-        .bloco-palavras__letra:focus {
-            outline: none;
-        }
-        .bloco-palavras__letra:valid {
-            background-color: #D0F4EA;
-        }
-    </style>
 </head>
 <body>
     
@@ -96,9 +28,9 @@
             <div class="informacoes-popup">
                 <p>Como jogar?</p>&nbsp;
                 <p>Descubra as palavras certas. Depois de cada tentativa, as peças mostram o quão perto você está da solução.</p>&nbsp;
-                <p>A letra<span class="letras-pop__certa"> T </span>faz parte da palavra e está na posição correta.</p>&nbsp;
-                <p>A letra<span class="letras-pop__errada"> R </span>faz parte da palavra mas em outra posição.</p>&nbsp;
-                <p>A letra<span class="letras-pop__nao-tem"> M </span>não faz parte da palavra.</p>&nbsp;
+                <p>A letra<span class="letras-palavra__certa"> T </span>faz parte da palavra e está na posição correta.</p>&nbsp;
+                <p>A letra<span class="letras-palavra__errada"> R </span>faz parte da palavra mas em outra posição.</p>&nbsp;
+                <p>A letra<span class="letras-palavra__nao-tem"> M </span>não faz parte da palavra.</p>&nbsp;
                 <p>Descubra as palavras certas. Depois de cada tentativa, as peças mostram o quão perto você está da solução.</p>&nbsp;
                 <p>Os acentos são preenchidos automaticamente e não são considerados nas dicas.</p>&nbsp;
                 <p>As palavras podem possuir letras repetidas.</p>&nbsp;
