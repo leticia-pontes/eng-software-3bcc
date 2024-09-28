@@ -66,7 +66,7 @@
                 {% endfor %}
             </form>
         </div>
-
+    
         <!-- USUÁRIO -->
         <div class="usuario__container">
             <div class="usuario__imagem">
@@ -76,14 +76,14 @@
                     <img src="{% static 'img/assets/icon-user.png' %}" alt="Imagem não disponível">
                 {% endif %}
             </div>
-
+    
             <div class="usuario__info">
                 <div class="usuario__nome">{{ nome }}</div>
                 <div class="usuario__pontos">
                     Pontos: <span id="qtde-pontos">{{ user.pontuacao_total }}</span> ponto(s)
                 </div>
                 <div class="usuario__escolha-tema">
-                    <span class="label__escolha-tema">Tema:</span><br>
+                    <span class="label__escolha-tema">Tema:</span>
                     <select name="select-tema" class="usuario__select-tema">
                         {% for tema in temas %}
                             <option value="{{ tema.descricao|lower }}">{{ tema.descricao }}</option>
@@ -92,6 +92,7 @@
                 </div>
             </div>
         </div>
+    </div>    
 
     <!-- FOOTER -->
     {% include "footer.html" %}
