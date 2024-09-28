@@ -24,7 +24,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 18%;
+    top: 17.5%;
     font-size: 34px;
 }
 
@@ -36,8 +36,9 @@
 }
 
 .informacoes-popup {
-    margin-top: 10%;
+    margin-top: 8.5%;
     margin-left: 1.5vh;
+    margin-bottom: 2vh;
 }
 
 .informacoes-popup span {
