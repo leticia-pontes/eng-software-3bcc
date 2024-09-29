@@ -36,7 +36,7 @@
 .pagina__conteudo {
     display: flex;
     align-items: center;
-    max-width: 1194px;
+    width: 1194px;
     margin: 0 auto 0;
     margin-top: 100px;
     gap: 120px;
@@ -48,6 +48,7 @@
     font-size: 31px;
     line-height: 38px;
     margin-bottom: 48px;
+    height: 200px;
     max-width: 585px;
     white-space: pre-line;
 }
