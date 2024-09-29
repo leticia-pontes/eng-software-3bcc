@@ -1,0 +1,86 @@
+.container-layout {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    position: absolute;
+}
+
+.container-popup {
+    display: block;
+    z-index: 10;
+    height: 520px;
+    width: 665px;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fff;
+}
+
+.titulo-popup {
+    color: var(--cor-primaria);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 17.5%;
+    font-size: 34px;
+}
+
+.botao-fechar-popup {
+    position: absolute;
+    right: 29.4%;
+    top: 17%;
+    font-size: 25px;
+}
+
+.informacoes-popup {
+    margin-top: 8.5%;
+    margin-left: 1.5vh;
+    margin-bottom: 2vh;
+}
+
+.informacoes-popup span {
+    font-size: 30px;
+    height: 10vh;
+    width: 10vw;
+    border-radius: 10%;
+}
+
+.informacoes-popup p {
+    line-height: normal;
+}
+
+.quadrado {
+    display: inline;
+    width: 30px;
+    height: 30px;
+    line-height: normal;
+    text-align: center; 
+    color: white;   
+    font-weight: bold; 
+    border-radius: 3px; 
+    padding: 4px;
+    border: 1px solid var(--borda-campo-letra);
+}
+
+.quadrado span {
+    padding: 50px;
+}
+
+.letra-certa {
+    font-size: 24pt !important;
+    background: #0CCABA;
+    color: white !important;
+}
+
+.letra-errada {
+    background: #f6ce3f;
+    color: white !important;
+}
+
+.letra-nao-tem {
+    font-size: 21pt !important; 
+    color: #000;
+}

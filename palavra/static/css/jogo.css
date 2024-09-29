@@ -1,25 +1,8 @@
+@import url('colors.css');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
 body {
     overflow: hidden;
-}
-
-.titulo-popup {
-    color: var(--cor-primaria);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 19.5%;
-    font-size: 34px;
-}
-
-.botao-fechar-popup {
-    position: absolute;
-    right: 10%;
-    top: 19%;
-    font-size: 25px;
-}
-
-.informacoes-popup {
-    margin-top: 10%;
 }
 
 .alerta {
@@ -46,13 +29,23 @@ body {
     border-radius: 10px;
 }
 
+.container__pagina {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
 .bloco-palavras__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 90vh;
     margin-top: 10px;
+    margin-left: 57.5vh;
 }
 
 .bloco-palavras__fila {
@@ -65,19 +58,24 @@ body {
     opacity: 0.6;
 }
 
+.bloco-palavras__fila input {
+    color: var(--cor-fonte);
+    font-family: "Bungee", sans-serif !important;
+}
+
 .bloco-palavras__letra {
-    max-width: 60px;
+    max-width: 70px;
     width: 100%;
-    height: 60px;
+    height: 70px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--borda-campo-letra);
     box-shadow: var(--borda-box-shadow);
-    font-size: 22px;
+    font-size: 26px;
     cursor: default;
-    padding-left: 30px;
+    padding-left: 25px;
     caret-color: transparent;
 }
 
@@ -85,15 +83,41 @@ body {
     outline: none;
 }
 
-.bloco-palavras__letra:valid {
-    background-color: #D0F4EA;
+.letras-palavra__certa {
+    font-size: 24pt !important;
+    background: #0CCABA;
+    color: white !important;
+}
+
+.letras-palavra__errada {
+    background: #f6ce3f;
+    color: white !important;
+}
+
+@keyframes mudarBorda {
+    0% {
+        border-color: var(--borda-campo-letra);
+    }
+    50% {
+        border-color: red;
+    }
+    100% {
+        border-color: var(--borda-campo-letra);
+    }
+}
+
+.borda-animada {
+    border-width: 2px;
+    border-style: solid;
+    animation: mudarBorda 0.7s ease-in-out;
 }
 
 .usuario__container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: -15vh;
+    margin-right: 16vh;
 }
 
 .usuario__imagem {
@@ -108,12 +132,13 @@ body {
 
 .usuario__info {
     text-align: left;
-    color: #fff;
+    color: #000;
 }
 
 .usuario__nome {
     font-size: 20px;
     font-weight: bold;
+    line-height: 6vh;
 }
 
 .usuario__pontos {
@@ -122,4 +147,9 @@ body {
 
 .usuario__escolha-tema {
     margin-top: 10px;
+}
+
+.usuario__select-tema option {
+    font-family: 'Bungee', sans-serif;
+    font-size: 16px;
 }
