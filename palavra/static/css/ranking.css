@@ -32,6 +32,10 @@ main {
     margin-left: 7px;
 }
 
+.posicao-ranking {
+    font-size: 26px;
+}
+
 .fa-square-poll-vertical:before {
     font-size: 25px;
 }
