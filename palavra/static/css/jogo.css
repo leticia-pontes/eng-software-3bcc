@@ -94,6 +94,11 @@ body {
     color: white !important;
 }
 
+.linha-destaque {
+    background-color: #c9c4c489;
+    transition: background-color 0.3s, border 0.3s;
+}
+
 @keyframes mudarBorda {
     0% {
         border-color: var(--borda-campo-letra);
