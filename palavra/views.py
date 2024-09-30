@@ -67,7 +67,6 @@ def jogo(request):
             palavras_validas = Palavra.objects.values_list('descricao', flat=True)
             termo = Termo(palavra_correta, set(palavras_validas))
 
-            # Testa a palavra
             try:
                 result = termo.test_guess(palavra)
                 
@@ -77,13 +76,13 @@ def jogo(request):
                     request.session['nova_palavra'] = True
                     return JsonResponse({'status': 'success', 'result': result.to_dict(), 'win': True})
                 
-                # Atualiza a contagem de tentativas
                 request.session['num_tentativas'] += 1
                 max_tentativas = 6
 
                 if request.session['num_tentativas'] >= max_tentativas:
                     request.session['nova_palavra'] = True
                     request.session['num_tentativas'] = 0
+
                     return JsonResponse({'status': 'success', 'result': result.to_dict(), 'palavra_correta': palavra_correta, 'win': False, 'message': 'Tentativas esgotadas'})
 
                 return JsonResponse({'status': 'success', 'result': result.to_dict(), 'win': False})
@@ -138,5 +137,8 @@ def configuracoes(request):
 def mostrar_ranking_melhores(request):
     if not request.user.is_authenticated:
         return redirect('/palavra/entrar/')
+    
     jogadores = Usuario.objects.order_by('-pontuacao_total')[:5]
-    return render(request, 'palavra/ranking.html', {'top_cinco': jogadores})
+    ranking = {jogador.username: posicao + 1 for posicao, jogador in enumerate(jogadores)}
+
+    return render(request, 'palavra/ranking.html', {'top_cinco': jogadores, 'ranking': ranking})
