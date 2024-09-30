@@ -181,12 +181,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 indiceLinhaAtiva = 0;
             } else {
                 atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva]);
-                
-                if (indiceLinhaAtiva === linhas.length) {
+            
+                if (indiceLinhaAtiva === linhas.length - 1) {
                     desativaLinhasNaoAtivas();
-                    
+            
                     setTimeout(() => {
-                        mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
+                        const mensagem = `A palavra certa era ${data.palavra_correta}.\nTente de novo.`;
+                        mostrarAlerta("Não foi dessa vez...", mensagem);
                         limparInputs();
                         indiceLinhaAtiva = 0;
                     }, 600);

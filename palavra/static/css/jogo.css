@@ -180,3 +180,17 @@ body {
     font-family: 'Bungee', sans-serif;
     font-size: 16px;
 }
+
+.usuario__escolha-tema select {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Bungee', sans-serif;
+    appearance: none;
+    -moz-appearance: none;
+}
+
+.usuario__escolha-tema {
+    position: relative;
+    display: inline-block;
+}
