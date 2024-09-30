@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
             linha.querySelectorAll('.bloco-palavras__letra').forEach(input => {
                 input.disabled = (indice !== indiceLinhaAtiva);
             });
+
+            if (indice === indiceLinhaAtiva) {
+                linha.querySelectorAll('.bloco-palavras__letra').forEach(input => {
+                    input.classList.add('linha-destaque');
+                });
+            } else {
+                linha.querySelectorAll('.bloco-palavras__letra').forEach(input => {
+                    input.classList.remove('linha-destaque');
+                });
+            }
         });
     }
 
@@ -98,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
             if (elementoLetra) {
                 elementoLetra.value = letra[0];
-                elementoLetra.classList.remove('letras-palavra__certa', 'letras-palavra__errada', 'letras-palavra__nao-tem');
+                elementoLetra.classList.remove('letras-palavra__certa', 'letras-palavra__errada', 'letras-palavra__nao-tem', '.linha-destaque');
 
                 if (letra[1] === 'CORRECT_POSITION') {
                     elementoLetra.classList.add('letras-palavra__certa');
