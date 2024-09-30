@@ -31,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (indiceLinhaAtiva <= linhas.length - 1) {
                     indiceLinhaAtiva++;
                     desativaLinhasNaoAtivas();
-
-                    console.log(indiceLinhaAtiva);
                     
                     if (indiceLinhaAtiva < linhas.length)
                         setTimeout(() => linhas[indiceLinhaAtiva].querySelector('.bloco-palavras__letra').focus(), 100);
@@ -136,61 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
         elementos[0].focus();
     }
-
-    // async function enviaPalavra(palavra) {
-    //     fetch('/jogo/', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ palavra: palavra })
-    //     })
-    //     .then(response => {
-    //         console.log(response);
-
-    //         if (response.statusText !== 'OK') {
-    //             throw new Error("RESPOSTA INESPERADA");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         let result = data['result'];
-    //         // console.log('Pa pum pirulito pão doce:', result);
-            
-    //         if (result === undefined) {
-    //             throw new Error("RESULTADO INDEFINIDO");
-    //         }
-
-    //         let indice = indiceLinhaAtiva === 0 ? 0 : indiceLinhaAtiva - 1;
-            
-    //         if (result['win']) {
-    //             atualizaFeedback(result['feedback'], linhas[indice], true);
-
-    //             setTimeout(() => {
-    //                 mostrarAlerta("Você ganhou!", "Parabéns por acertar a palavra!");
-    //                 limparInputs();
-
-    //             }, 600);
-
-    //             indiceLinhaAtiva = 0;
-    //         } else {
-    //             atualizaFeedback(result['feedback'], linhas[indice]);
-
-    //             if (indiceLinhaAtiva === linhas.length) {
-    //                 desativaLinhasNaoAtivas();
-                
-    //                 setTimeout(() => {
-    //                     mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
-    //                     limparInputs();
-    //                     indiceLinhaAtiva = 0;
-    //                 }, 600);
-    //             }
-    //         }
-    //     })
-    //     .catch(error => {
-    //         throw error;
-    //     });
-    // }
     
     async function enviaPalavra(palavra) {
         try {
