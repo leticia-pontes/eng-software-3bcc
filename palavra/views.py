@@ -51,38 +51,62 @@ def jogo(request):
     if 'palavra_correta' not in request.session or request.session.get('nova_palavra', False):
         request.session['palavra_correta'] = get_palavra_aleatoria()
         request.session['nova_palavra'] = False
+        request.session['num_tentativas'] = 0  # Apenas aqui inicializamos as tentativas
+
+    palavra_correta = request.session['palavra_correta']
 
     if request.method == 'POST':
-        dados = json.loads(request.body)
-        palavra = dados.get('palavra', '')
-        palavra_correta = request.session['palavra_correta']
+        try:
+            dados = json.loads(request.body)
+            palavra = dados.get('palavra', '').strip()
 
-        if not palavra:
-            return JsonResponse({'status': 'error', 'message': 'No word provided'}, status=400)
+            # Verifica se a palavra foi enviada corretamente
+            if not palavra:
+                return JsonResponse({'status': 'error', 'message': 'Nenhuma palavra fornecida'}, status=400)
 
-        if palavra_correta:
             palavras_validas = Palavra.objects.values_list('descricao', flat=True)
             termo = Termo(palavra_correta, set(palavras_validas))
+
+            # Testa a palavra
             try:
                 result = termo.test_guess(palavra)
+                
                 if result.win:
                     usuario.pontuacao_total += 10
                     usuario.save()
-
                     request.session['nova_palavra'] = True
-                return JsonResponse({'status': 'success', 'result': result.to_dict()})
+                    return JsonResponse({'status': 'success', 'result': result.to_dict(), 'win': True})
+                
+                # Atualiza a contagem de tentativas
+                request.session['num_tentativas'] += 1
+                max_tentativas = 6
+
+                if request.session['num_tentativas'] >= max_tentativas:
+                    request.session['nova_palavra'] = True
+                    request.session['num_tentativas'] = 0
+                    return JsonResponse({'status': 'success', 'result': result.to_dict(), 'palavra_correta': palavra_correta, 'win': False, 'message': 'Tentativas esgotadas'})
+
+                return JsonResponse({'status': 'success', 'result': result.to_dict(), 'win': False})
+
             except InvalidAttempt as e:
                 return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
 
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Erro no formato da requisição'}, status=400)
+
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': 'Erro inesperado: ' + str(e)}, status=500)
+
     return render(request, 'palavra/jogo.html', {
-        'temas': temas, 
+        'temas': temas,
         'usuario': usuario,
     })
+
 
 @login_required
 def pontos_view(request):
     usuario = request.user
-    return JsonResponse({'pontuacao': usuario.pontuacao_total})
+    return JsonResponse({'pontuacao': usuario.pontuacao_total if usuario else 0})
 
 
 # Configurações
