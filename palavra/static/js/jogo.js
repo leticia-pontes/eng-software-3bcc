@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function handleKeydown(event, elementos, indice) {
+
         if (event.key === 'Enter') {
+
             let preenchido = Array.from(elementos).every(elemento => elemento.value.trim() !== '');
             if (!preenchido) return;
 
@@ -25,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 await enviaPalavra(palavra);
-
-                // console.log(`PRESTA ATENÇÃO AQUI: ${response.statusText}`);
 
                 if (indiceLinhaAtiva <= linhas.length - 1) {
                     indiceLinhaAtiva++;
@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
             } catch (error) {
-                let indice = indiceLinhaAtiva === 0 ? 0 : indiceLinhaAtiva - 1;
-                let elementos = linhas[indice].querySelectorAll('.bloco-palavras__letra');
+                let elementos = linhas[indiceLinhaAtiva].querySelectorAll('.bloco-palavras__letra');
                 elementos.forEach(elemento => animarBorda(elemento));
             }
 
         } else if (event.key === 'Backspace') {
+
             let elementoAtual = elementos[indice];
             let elementoAnterior = elementos[indice - 1];
 
@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (letra[1] === 'CORRECT_POSITION') {
                     elementoLetra.classList.add('letras-palavra__certa');
+
                 } else if (letra[1] === 'WRONG_POSITION') {
                     elementoLetra.classList.add('letras-palavra__errada');
                 }
@@ -125,9 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function apagarPalavra() {
-        let indice = indiceLinhaAtiva === 0 ? 0 : indiceLinhaAtiva - 1;
-
-        let linhaAtiva = linhas[indice];
+        let linhaAtiva = linhas[indiceLinhaAtiva];
         let elementos = linhaAtiva.querySelectorAll('.bloco-palavras__letra');
         
         elementos.forEach(elemento => {
@@ -214,12 +213,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (typeof result === 'undefined' || !('win' in result)) {
                 throw new Error("RESULTADO INDEFINIDO");
             }
-
-            let indice = indiceLinhaAtiva === 0 ? 0 : indiceLinhaAtiva - 1;
     
             if (result['win']) {
 
-                atualizaFeedback(result['feedback'], linhas[indice], true);
+                atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva], true);
                 
                 setTimeout(() => {
                     mostrarAlerta("Você ganhou!", "Parabéns por acertar a palavra!");
@@ -228,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 indiceLinhaAtiva = 0;
             } else {
-                atualizaFeedback(result['feedback'], linhas[indice]);
+                atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva]);
                 
                 if (indiceLinhaAtiva === linhas.length) {
                     desativaLinhasNaoAtivas();
