@@ -114,10 +114,32 @@ body {
 
 .usuario__container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: -15vh;
-    margin-right: 16vh;
+    margin-right: 20vh;
+}
+
+.usuario__info {
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}
+
+.usuario__nome {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 6vh;
+    text-align: center;
+    max-width: 165px;
+}
+
+.usuario__info .usuario__pontos,
+.usuario__info .usuario__escolha-tema {
+    max-width: 180px;
+    width: 180px;
+    text-align: left;
 }
 
 .usuario__imagem {
@@ -125,8 +147,8 @@ body {
 }
 
 .foto-perfil {
-    width: 50px;
-    height: 50px;
+    width: 165px;
+    height: 165px;
     border-radius: 50%;
 }
 
