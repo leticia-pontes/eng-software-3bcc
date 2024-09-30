@@ -41,7 +41,7 @@ def cadastrar(request):
     return render(request, 'palavra/cadastro.html', {'form': form})
 
 # Lógica do jogo
-@login_required(login_url='/palavra/entrar/')
+@login_required(login_url='/entrar/')
 @csrf_exempt
 def jogo(request):
     usuario = request.user

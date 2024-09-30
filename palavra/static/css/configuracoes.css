@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
 .title-pagina {
-    font-size: 34px;
-    margin: 50px 0 130px;
+    font-size: 26px;
+    margin-top: 110px;
+    margin-bottom: 40px;
 }
 
 .configuracoes__container {
@@ -10,7 +13,7 @@
 
 .configuracoes__sidebar-lateral {
     width: 100%;
-    max-width: 350px;
+    max-width: 280px;
     border-right: 5px solid rgba(153, 153, 153, 0.5);
     color: #fff;
     padding-top: 20px;
@@ -36,9 +39,11 @@
     gap: 10px;
     align-items: center;
 }
+
 .configuracoes__sidebar-lateral .configuracoes__link-name.active {
     color: var(--cor-primaria);
 }
+
 .configuracoes__sidebar-lateral .configuracoes__link-name.link-delete {
     color: #E02130;
 }
@@ -46,9 +51,11 @@
 .configuracoes__sidebar-lateral .configuracoes__link-name svg {
     fill: #000;
 }
+
 .configuracoes__sidebar-lateral .configuracoes__link-name.active svg {
     fill: var(--cor-primaria);
 }
+
 .configuracoes__sidebar-lateral .configuracoes__link-name.link-delete svg {
     fill: #E02130;
 }
@@ -127,6 +134,29 @@
     box-shadow: var(--borda-box-shadow);
     line-height: 50px;
     justify-content: center;
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.form-group label {
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    max-width: 650px;
+    width: 100%;
+    margin-right: 10px;
+    font-family: "Bungee", sans-serif !important;
+}
+
+.form-group input[type="file"] {
+    padding-top: 12px;
+    align-items: center;
 }
 
 @media (max-width: 1070px) {

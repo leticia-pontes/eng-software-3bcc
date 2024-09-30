@@ -16,23 +16,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function handleKeydown(event, elementos, indice) {
+    async function handleKeydown(event, elementos, indice) {
+
         if (event.key === 'Enter') {
+
             let preenchido = Array.from(elementos).every(elemento => elemento.value.trim() !== '');
             if (!preenchido) return;
 
             let palavra = Array.from(elementos).map(elemento => elemento.value.trim()).join('');
-            enviaPalavra(palavra);
+            
+            try {
+                await enviaPalavra(palavra);
 
-            if (indiceLinhaAtiva <= linhas.length - 1) {
-                indiceLinhaAtiva++;
-                desativaLinhasNaoAtivas();
+                if (indiceLinhaAtiva <= linhas.length - 1) {
+                    indiceLinhaAtiva++;
+                    desativaLinhasNaoAtivas();
+
+                    console.log(indiceLinhaAtiva);
+                    
+                    if (indiceLinhaAtiva < linhas.length)
+                        setTimeout(() => linhas[indiceLinhaAtiva].querySelector('.bloco-palavras__letra').focus(), 100);
+                }
                 
-                if (indiceLinhaAtiva < linhas.length)
-                    setTimeout(() => linhas[indiceLinhaAtiva].querySelector('.bloco-palavras__letra').focus(), 100);
+            } catch (error) {
+                let elementos = linhas[indiceLinhaAtiva].querySelectorAll('.bloco-palavras__letra');
+                elementos.forEach(elemento => animarBorda(elemento));
             }
 
         } else if (event.key === 'Backspace') {
+
             let elementoAtual = elementos[indice];
             let elementoAnterior = elementos[indice - 1];
 
@@ -92,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (letra[1] === 'CORRECT_POSITION') {
                     elementoLetra.classList.add('letras-palavra__certa');
+
                 } else if (letra[1] === 'WRONG_POSITION') {
                     elementoLetra.classList.add('letras-palavra__errada');
                 }
@@ -113,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function apagarPalavra() {
-        let linhaAtiva = linhas[indiceLinhaAtiva - 1];
+        let linhaAtiva = linhas[indiceLinhaAtiva];
         let elementos = linhaAtiva.querySelectorAll('.bloco-palavras__letra');
         
         elementos.forEach(elemento => {
@@ -124,36 +137,99 @@ document.addEventListener('DOMContentLoaded', function() {
         elementos[0].focus();
     }
 
-    function enviaPalavra(palavra) {
-        fetch('/jogo/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ palavra: palavra })
-        })
-        .then(response => response.json())
-        .then(data => {
+    // async function enviaPalavra(palavra) {
+    //     fetch('/jogo/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ palavra: palavra })
+    //     })
+    //     .then(response => {
+    //         console.log(response);
 
-            let result = data['result'];
-            // console.log('Pa pum pirulito pão doce:', result);
+    //         if (response.statusText !== 'OK') {
+    //             throw new Error("RESPOSTA INESPERADA");
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         let result = data['result'];
+    //         // console.log('Pa pum pirulito pão doce:', result);
             
-            if (result['win']) {
-                atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva - 1], true);
+    //         if (result === undefined) {
+    //             throw new Error("RESULTADO INDEFINIDO");
+    //         }
 
+    //         let indice = indiceLinhaAtiva === 0 ? 0 : indiceLinhaAtiva - 1;
+            
+    //         if (result['win']) {
+    //             atualizaFeedback(result['feedback'], linhas[indice], true);
+
+    //             setTimeout(() => {
+    //                 mostrarAlerta("Você ganhou!", "Parabéns por acertar a palavra!");
+    //                 limparInputs();
+
+    //             }, 600);
+
+    //             indiceLinhaAtiva = 0;
+    //         } else {
+    //             atualizaFeedback(result['feedback'], linhas[indice]);
+
+    //             if (indiceLinhaAtiva === linhas.length) {
+    //                 desativaLinhasNaoAtivas();
+                
+    //                 setTimeout(() => {
+    //                     mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
+    //                     limparInputs();
+    //                     indiceLinhaAtiva = 0;
+    //                 }, 600);
+    //             }
+    //         }
+    //     })
+    //     .catch(error => {
+    //         throw error;
+    //     });
+    // }
+    
+    async function enviaPalavra(palavra) {
+        try {
+            const response = await fetch('/jogo/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ palavra: palavra })
+            });
+    
+            if (response.statusText !== 'OK') {
+                throw new Error(`Erro: ${response.statusText}`);
+            }
+    
+            const data = await response.json();
+    
+            let result = data['result'];
+    
+            if (typeof result === 'undefined' || !('win' in result)) {
+                throw new Error("RESULTADO INDEFINIDO");
+            }
+    
+            if (result['win']) {
+
+                atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva], true);
+                
                 setTimeout(() => {
                     mostrarAlerta("Você ganhou!", "Parabéns por acertar a palavra!");
                     limparInputs();
-
                 }, 600);
 
                 indiceLinhaAtiva = 0;
             } else {
-                atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva - 1]);
-
+                atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva]);
+                
                 if (indiceLinhaAtiva === linhas.length) {
                     desativaLinhasNaoAtivas();
-                
+                    
                     setTimeout(() => {
                         mostrarAlerta("Não foi dessa vez...", "Você não acertou a palavra. Tente de novo.");
                         limparInputs();
@@ -161,13 +237,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }, 600);
                 }
             }
-        })
-        .catch(error => {
-            let elementos = linhas[indiceLinhaAtiva - 1].querySelectorAll('.bloco-palavras__letra');
-            elementos.forEach(elemento => animarBorda(elemento));
-            console.error('Error sending word to backend:', error);
-        });
-    }
+        } catch (error) {
+            console.error('Erro na função enviaPalavra:', error);
+            throw error;
+        }
+    }    
 
     function limparInputs() {
         linhas.forEach(linha => {
