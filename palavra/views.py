@@ -79,6 +79,11 @@ def jogo(request):
         'usuario': usuario,
     })
 
+@login_required
+def pontos_view(request):
+    usuario = request.user
+    return JsonResponse({'pontuacao': usuario.pontuacao_total})
+
 
 # Configurações
 @login_required(login_url='/palavra/entrar/')

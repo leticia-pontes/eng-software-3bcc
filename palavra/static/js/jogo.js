@@ -158,11 +158,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
     
             if (result['win']) {
-
                 atualizaFeedback(result['feedback'], linhas[indiceLinhaAtiva], true);
                 
                 setTimeout(() => {
                     mostrarAlerta("Você ganhou!", "Parabéns por acertar a palavra!");
+                    
+                    atualizaPontuacao();
+
                     limparInputs();
                 }, 600);
 
@@ -184,7 +186,25 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Erro na função enviaPalavra:', error);
             throw error;
         }
-    }    
+    }
+
+    async function atualizaPontuacao() {
+        try {
+            const response = await fetch('/pontos/');
+    
+            if (!response.ok) {
+                throw new Error(`Erro ao buscar pontuação: ${response.statusText}`);
+            }
+    
+            const data = await response.json();
+            const novaPontuacao = data.pontuacao;
+
+            document.getElementById('pontuacao-header').innerText = `${novaPontuacao} ponto(s)`;
+            document.getElementById('qtde-pontos').innerText = novaPontuacao;
+        } catch (error) {
+            console.error('Erro ao atualizar a pontuação:', error);
+        }
+    }
 
     function limparInputs() {
         linhas.forEach(linha => {
