@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="header__logo">
-                <a href="{% url 'index' %}" class="navbar-brand">
+                <a href="{% if user.is_authenticated %}{% url 'jogo' %}{% else %}{% url 'index' %}{% endif %}" class="navbar-brand">
                     <span>Palavra</span>
                 </a>
             </div>
