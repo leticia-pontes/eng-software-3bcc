@@ -1,0 +1,18 @@
+[run]
+# Omitir diretórios ou arquivos específicos
+omit =
+    manage.py
+    termooo/asgi.py
+    termooo/wsgi.py
+    termooo/*
+    palavra/migrations/*
+    
+include = palavra/*
+
+[report]
+# Linhas para ignorar na contagem de cobertura
+exclude_lines =
+    # Ignore as linhas com pragma: no cover
+    pragma: no cover
+    # Ignorar blocos if __name__ == '__main__':
+    if __name__ == .__main__.:

@@ -18,15 +18,15 @@ def count_frequencies(values):
 
 @dataclass
 class Result:
-    '''Classe para armazenar o resultado de uma tentativa.'''
-    win: bool
-    feedback: Sequence[Tuple[str, Feedback]]
+    def __init__(self, win, feedback):
+        self.win = win
+        self.feedback = feedback
 
     def to_dict(self):
-        '''Converte o resultado em um dicionário para ser serializável em JSON.'''
+        '''Converte o resultado em um dicionário para ser serializável em JSON.''' 
         return {
-            "win": self.win,
-            "feedback": [(letter, feedback.name) for letter, feedback in self.feedback]
+            "win": self.win, 
+            "feedback": [(letter, feedback) for letter, feedback in self.feedback]
         }
 
 class InvalidAttempt(Exception):

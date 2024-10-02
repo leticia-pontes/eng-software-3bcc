@@ -1,4 +1,4 @@
-from unittest import TestCase
+from django.test import TestCase
 from palavra.termo import Termo, Feedback, InvalidAttempt
 
 
@@ -32,7 +32,7 @@ class TermoTest(TestCase):
         self.assertTrue(result.win)
         self.assertListEqual(result.feedback, expected)
 
-    def test_all_WRONG_POSITION(self):
+    def test_all_wrong_position(self):
         termo = Termo('abc', {'abc', 'cab'})
         result = termo.test_guess('cab')
         expected = [
@@ -71,3 +71,53 @@ class TermoTest(TestCase):
             ('e', Feedback.CORRECT_POSITION),
         ]
         self.assertEqual(result.feedback, expected)
+    
+    def test_mixed_feedback(self):
+        termo = Termo('carta', {'carta', 'tacar'})
+        result = termo.test_guess('tacar')
+        expected = [
+            ('t', Feedback.WRONG_POSITION),
+            ('a', Feedback.CORRECT_POSITION),
+            ('c', Feedback.WRONG_POSITION),
+            ('a', Feedback.WRONG_POSITION),
+            ('r', Feedback.WRONG_POSITION),
+        ]
+        self.assertFalse(result.win)
+        self.assertListEqual(result.feedback, expected)
+
+    def test_repeated_letters(self):
+        termo = Termo('banana', {'banana', 'nabana'})
+        result = termo.test_guess('nabana')
+        expected = [
+            ('n', Feedback.WRONG_POSITION),
+            ('a', Feedback.CORRECT_POSITION),
+            ('b', Feedback.WRONG_POSITION),
+            ('a', Feedback.CORRECT_POSITION),
+            ('n', Feedback.CORRECT_POSITION),
+            ('a', Feedback.CORRECT_POSITION),
+        ]
+        self.assertFalse(result.win)
+        self.assertListEqual(result.feedback, expected)
+
+    def test_word_not_in_valid_words(self):
+        termo = Termo('casa', {'casa'})
+        with self.assertRaises(InvalidAttempt):
+            termo.test_guess('abcd')
+
+    def test_to_dict(self):
+        termo = Termo('casal', {'casal'})
+        result = termo.test_guess('casal')
+        
+        # Agora, vamos testar a conversão para dicionário
+        expected_dict = {
+            "win": True,
+            "feedback": [
+                ('c', Feedback.CORRECT_POSITION),
+                ('a', Feedback.CORRECT_POSITION),
+                ('s', Feedback.CORRECT_POSITION),
+                ('a', Feedback.CORRECT_POSITION),
+                ('l', Feedback.CORRECT_POSITION),
+            ]
+        }
+        
+        self.assertEqual(result.to_dict(), expected_dict)
