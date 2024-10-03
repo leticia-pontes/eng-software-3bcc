@@ -26,7 +26,7 @@ class Result:
         '''Converte o resultado em um dicionário para ser serializável em JSON.''' 
         return {
             "win": self.win, 
-            "feedback": [(letter, feedback) for letter, feedback in self.feedback]
+            "feedback": [(letter, feedback.name) for letter, feedback in self.feedback]
         }
 
 class InvalidAttempt(Exception):
