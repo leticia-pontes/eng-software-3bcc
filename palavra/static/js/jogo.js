@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    let composicaoAtiva = false;
+
     async function handleKeydown(event, elementos, indice) {
 
         if (event.key === 'Enter') {
@@ -53,11 +55,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 elementoAtual.value = '';
             }
 
-        } else if (!((event.keyCode >= 65 && event.keyCode <= 90) || 
+        } else if (event.key === "Dead") {
+            event.preventDefault();
+            composicaoAtiva = true;
+    
+        } else if (composicaoAtiva) {
+            let elementoAtual = elementos[indice];
+            let entrada = event.key;
+
+            elementoAtual.value = entrada.length === 1 ? entrada : entrada[1];
+
+            composicaoAtiva = false;
+            event.preventDefault();
+
+            if (indice < elementos.length - 1) {
+                elementos[indice + 1].focus();
+            }
+
+        } else if (event.keyCode !== 59 && !((event.keyCode >= 65 && event.keyCode <= 90) || 
                     (event.keyCode >= 97 && event.keyCode <= 122) || 
                     ignorar.includes(event.key)) || 
-                ["`", "~", "´", "^", "¨", ".", ",", ";", "'", "\"", "[", "]"].includes(event.key)) {
-            event.preventDefault();
+                ["`", "~", "´", "^", "¨", ".", ",", ";", "'", "\"", "[", "]"].includes(event.key)) {      
+            event.preventDefault();    
         }
     }
 
@@ -160,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
     
             const data = await response.json();
-    
+
             let result = data['result'];
     
             if (typeof result === 'undefined' || !('win' in result)) {

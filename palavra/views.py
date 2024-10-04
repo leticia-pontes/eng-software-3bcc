@@ -51,7 +51,7 @@ def jogo(request):
     if 'palavra_correta' not in request.session or request.session.get('nova_palavra', False):
         request.session['palavra_correta'] = get_palavra_aleatoria()
         request.session['nova_palavra'] = False
-        request.session['num_tentativas'] = 0  # Apenas aqui inicializamos as tentativas
+        request.session['num_tentativas'] = 0
 
     palavra_correta = request.session['palavra_correta']
 
@@ -60,7 +60,6 @@ def jogo(request):
             dados = json.loads(request.body)
             palavra = dados.get('palavra', '').strip()
 
-            # Verifica se a palavra foi enviada corretamente
             if not palavra:
                 return JsonResponse({'status': 'error', 'message': 'Nenhuma palavra fornecida'}, status=400)
 
