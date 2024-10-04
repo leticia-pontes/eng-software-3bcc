@@ -6,6 +6,8 @@ omit =
     termooo/wsgi.py
     termooo/*
     palavra/migrations/*
+    palavra/templatetags/__init__.py
+    */__init__.py
     
 include = palavra/*
 

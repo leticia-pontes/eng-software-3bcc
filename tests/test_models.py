@@ -1,9 +1,15 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
-from palavra.models import Usuario, Tema, Palavra
+from django.apps import apps
+from palavra.models import Tema, Palavra, Usuario
 
 class UsuarioModelTest(TestCase):
-    
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        apps.get_app_config('palavra')
+
     def setUp(self):
         self.usuario = Usuario(username='testuser', password='testpass', pontuacao_total=100)
         self.usuario.save()
@@ -26,13 +32,25 @@ class UsuarioModelTest(TestCase):
 
 
 class TemaModelTest(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        apps.get_app_config('palavra')
+
     def setUp(self):
         self.tema = Tema.objects.create(descricao='Teste')
 
     def test_str(self):
         self.assertEqual(str(self.tema), 'Teste')
 
+
 class PalavraModelTest(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        apps.get_app_config('palavra')
+
     def setUp(self):
         self.tema = Tema.objects.create(descricao='Teste')
         self.palavra = Palavra.objects.create(descricao='palavra', dificuldade=Palavra.FACIL, tema=self.tema)
