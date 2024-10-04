@@ -12,6 +12,7 @@ class Feedback(Enum):
 def count_frequencies(values):
     '''Conta a frequência de cada valor na lista fornecida.'''
     frequencies = {}
+    
     for value in values:
         frequencies[value] = frequencies.get(value, 0) + 1
     return frequencies
@@ -44,6 +45,7 @@ class Termo:
     def __post_init__(self):
         '''Normaliza a palavra alvo e a lista de palavras válidas.'''
         self.normalized_target_word = unidecode(self.target_word).lower()
+
         self.normalized_valid_words = set(map(
             lambda word: unidecode(word).lower(),
             self.valid_words,
@@ -57,8 +59,10 @@ class Termo:
         for index, char in enumerate(guess):
             if char == self.normalized_target_word[index]:
                 yield self.target_word[index], Feedback.CORRECT_POSITION
+
             elif char in self.normalized_target_word:
                 yield char, Feedback.WRONG_POSITION
+            
             else:
                 yield char, Feedback.INCORRECT
 
@@ -66,6 +70,7 @@ class Termo:
         '''Obtém o feedback detalhado para a palavra fornecida.'''
         feedback = list(self._generate_feedback(guess))
         target_word_freq = count_frequencies(self.target_word)
+
         feedback_freq = count_frequencies(map(
             lambda pair: pair[0],
             filter(lambda pair: pair[1] == Feedback.CORRECT_POSITION, feedback)
@@ -73,17 +78,21 @@ class Termo:
 
         for char, freq in target_word_freq.items():
             if feedback_freq.get(char, 0) >= freq:
+
                 incorrect_indexes = map(lambda pair: pair[0], filter(
                     lambda pair: pair[1][0] == char and pair[1][1] == Feedback.WRONG_POSITION,
                     enumerate(feedback),
                 ))
+                
                 for index in incorrect_indexes:
                     feedback[index] = (feedback[index][0], Feedback.INCORRECT)
+        
         return feedback
 
     def test_guess(self, guess: str) -> Result:
         '''Testa uma palavra e retorna o resultado.'''
         normalized_guess = unidecode(guess).lower()
+
         if normalized_guess not in self.normalized_valid_words:
             raise InvalidAttempt('Tentativa inválida: palavra não permitida')
 
