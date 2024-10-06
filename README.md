@@ -24,11 +24,11 @@ cd eng-software-3bcc
 
 1. Construa a imagem Docker:
    ```bash
-   docker build -t termo-oo .
+   docker build -t palavra .
    ```
 2. Execute o container:
    ```bash
-   docker run -d -p 5200:5200 --name termo-oo-container termo-oo
+   docker run -d -p 5200:5200 --name palavra-container palavra
    ```
 3. Acesse o aplicativo em seu navegador:
    ```bash
