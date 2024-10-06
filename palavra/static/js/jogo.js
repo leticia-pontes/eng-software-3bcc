@@ -141,7 +141,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+        if (ganhou) {
+            // console.log("Acionou Confete");
+            acionarConfete();
+        }
     }
+
+    function acionarConfete() {
+        const duration = 5 * 1000;
+        const end = Date.now() + duration;
+    
+        const intervalo = setInterval(function() {
+            if (Date.now() > end) {
+                return clearInterval(intervalo);
+            }
+    
+            confetti({
+                startVelocity: 30,
+                spread: 360,
+                ticks: 60,
+                origin: {
+                    x: Math.random(),
+                    y: Math.random() - 0.2
+                }
+            });
+        }, 250);
+    }
+    
 
     function animarBorda(elemento) {
         elemento.classList.add('borda-animada');
