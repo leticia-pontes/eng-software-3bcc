@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # local
     'palavra.apps.PalavraConfig',
+    # 'palavra'
 ]
 
 MIDDLEWARE = [

@@ -10,6 +10,7 @@ class TermoTest(TestCase):
     def test_special_characters(self):
         termo = Termo('áéíóú', {'áéíóú'})
         result = termo.test_guess('aeiou')
+        
         expected = [
             ('á', Feedback.CORRECT_POSITION),
             ('é', Feedback.CORRECT_POSITION),
@@ -17,52 +18,63 @@ class TermoTest(TestCase):
             ('ó', Feedback.CORRECT_POSITION),
             ('ú', Feedback.CORRECT_POSITION),
         ]
+        
         self.assertTrue(result.win)
         self.assertListEqual(result.feedback, expected)
 
     def test_all_right(self):
-        termo = Termo('casa', {'casa'})
-        result = termo.test_guess('casa')
+        termo = Termo('casas', {'casas'})
+        result = termo.test_guess('casas')
+
         expected = [
             ('c', Feedback.CORRECT_POSITION),
             ('a', Feedback.CORRECT_POSITION),
             ('s', Feedback.CORRECT_POSITION),
             ('a', Feedback.CORRECT_POSITION),
+            ('s', Feedback.CORRECT_POSITION),
         ]
+
         self.assertTrue(result.win)
         self.assertListEqual(result.feedback, expected)
 
     def test_all_wrong_position(self):
-        termo = Termo('abc', {'abc', 'cab'})
-        result = termo.test_guess('cab')
+        termo = Termo('abcde', {'abcde', 'cabed'})
+        result = termo.test_guess('cabed')
+
         expected = [
             ('c', Feedback.WRONG_POSITION),
             ('a', Feedback.WRONG_POSITION),
             ('b', Feedback.WRONG_POSITION),
+            ('e', Feedback.WRONG_POSITION),
+            ('d', Feedback.WRONG_POSITION),
         ]
+
         self.assertFalse(result.win)
         self.assertListEqual(result.feedback, expected)
 
     def test_all_wrong(self):
-        termo = Termo('casa', {'casa', 'pent'})
-        result = termo.test_guess('pent')
+        termo = Termo('casal', {'casal', 'pente'})
+        result = termo.test_guess('pente')
         expected = [
             ('p', Feedback.INCORRECT),
             ('e', Feedback.INCORRECT),
             ('n', Feedback.INCORRECT),
             ('t', Feedback.INCORRECT),
+            ('e', Feedback.INCORRECT),
         ]
         self.assertFalse(result.win)
         self.assertListEqual(result.feedback, expected)
 
     def test_invalid_attempt(self):
-        termo = Termo('casa', {'casa', 'abc'})
+        termo = Termo('casa', {'casa', 'abcd'})
+
         with self.assertRaises(InvalidAttempt):
             termo.test_guess('abc')
 
     def test_duplicated(self):
         termo = Termo('teste', {'teste', 'eeeee'})
         result = termo.test_guess('eeeee')
+
         expected = [
             ('e', Feedback.INCORRECT),
             ('e', Feedback.CORRECT_POSITION),
@@ -70,11 +82,13 @@ class TermoTest(TestCase):
             ('e', Feedback.INCORRECT),
             ('e', Feedback.CORRECT_POSITION),
         ]
+
         self.assertEqual(result.feedback, expected)
     
     def test_mixed_feedback(self):
         termo = Termo('carta', {'carta', 'tacar'})
         result = termo.test_guess('tacar')
+
         expected = [
             ('t', Feedback.WRONG_POSITION),
             ('a', Feedback.CORRECT_POSITION),
@@ -82,12 +96,14 @@ class TermoTest(TestCase):
             ('a', Feedback.WRONG_POSITION),
             ('r', Feedback.WRONG_POSITION),
         ]
+
         self.assertFalse(result.win)
         self.assertListEqual(result.feedback, expected)
 
     def test_repeated_letters(self):
         termo = Termo('banana', {'banana', 'nabana'})
         result = termo.test_guess('nabana')
+
         expected = [
             ('n', Feedback.WRONG_POSITION),
             ('a', Feedback.CORRECT_POSITION),
@@ -96,11 +112,13 @@ class TermoTest(TestCase):
             ('n', Feedback.CORRECT_POSITION),
             ('a', Feedback.CORRECT_POSITION),
         ]
+
         self.assertFalse(result.win)
         self.assertListEqual(result.feedback, expected)
 
     def test_word_not_in_valid_words(self):
         termo = Termo('casa', {'casa'})
+
         with self.assertRaises(InvalidAttempt):
             termo.test_guess('abcd')
 
@@ -108,16 +126,21 @@ class TermoTest(TestCase):
         termo = Termo('casal', {'casal'})
         result = termo.test_guess('casal')
         
-        # Agora, vamos testar a conversão para dicionário
         expected_dict = {
             "win": True,
             "feedback": [
-                ('c', Feedback.CORRECT_POSITION),
-                ('a', Feedback.CORRECT_POSITION),
-                ('s', Feedback.CORRECT_POSITION),
-                ('a', Feedback.CORRECT_POSITION),
-                ('l', Feedback.CORRECT_POSITION),
+                ('c', 'CORRECT_POSITION'),
+                ('a', 'CORRECT_POSITION'),
+                ('s', 'CORRECT_POSITION'),
+                ('a', 'CORRECT_POSITION'),
+                ('l', 'CORRECT_POSITION'),
             ]
         }
         
         self.assertEqual(result.to_dict(), expected_dict)
+
+    def test_invalid_attempt_feedback_length(self):
+        termo = Termo('casa', {'casa', 'abc'})
+    
+        with self.assertRaises(InvalidAttempt):
+            termo.get_feedback('ab')
