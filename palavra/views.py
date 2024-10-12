@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -39,6 +39,10 @@ def cadastrar(request):
     else:
         form = CadastroForm()
     return render(request, 'palavra/cadastro.html', {'form': form})
+
+def sair(request):
+    logout(request)
+    return redirect('/')  
 
 # Lógica do jogo
 @login_required(login_url='/entrar/')
