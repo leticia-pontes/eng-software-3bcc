@@ -11,4 +11,5 @@ urlpatterns = [
     path('pontos/', views.pontos_view, name='pontos_view'),
     path("configuracoes/", views.configuracoes, name="configuracoes"),
     path("ranking/", views.mostrar_ranking_melhores, name="ranking"),
+    path("sair/", views.sair, name="sair"),
 ]
