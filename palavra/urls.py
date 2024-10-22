@@ -12,4 +12,5 @@ urlpatterns = [
     path("configuracoes/", views.configuracoes, name="configuracoes"),
     path("ranking/", views.mostrar_ranking_melhores, name="ranking"),
     path("sair/", views.sair, name="sair"),
+    path('deletar_conta/', views.deletar_conta, name='deletar_conta'),
 ]
