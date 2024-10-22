@@ -42,7 +42,15 @@ def cadastrar(request):
 
 def sair(request):
     logout(request)
-    return redirect('/')  
+    return redirect('/')
+
+def deletar_conta(request):
+    if request.method == 'POST':
+        usuario = request.user
+        Usuario.objects.filter(id=usuario.id).delete()
+        logout(request)
+        
+    return redirect('/')
 
 # Lógica do jogo
 @login_required(login_url='/entrar/')

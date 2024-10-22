@@ -45,7 +45,7 @@ cd eng-software-3bcc
    ```
 2. Instale as dependências:
    ```bash
-   pip install django unittest coverage termcolor unidecode python-decouple dj-database-url psycopg2-binary Pillow
+   pip install -r requirements.txt
    ```
 
 3. Aplique as migrações do banco de dados:
